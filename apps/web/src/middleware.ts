@@ -16,7 +16,13 @@ export function middleware(request: NextRequest) {
 
   // Generate CSRF token for new sessions
   if (!request.cookies.get('csrf-token')) {
-    const token = crypto.randomUUID();
+    // Generate a cryptographically strong token using 32 random bytes
+    const tokenBytes = new Uint8Array(32);
+    crypto.getRandomValues(tokenBytes);
+    const token = Array.from(tokenBytes)
+      .map(b => b.toString(16).padStart(2, '0'))
+      .join('');
+    
     response.cookies.set('csrf-token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
