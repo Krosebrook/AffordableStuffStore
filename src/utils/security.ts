@@ -88,8 +88,13 @@ function sanitizeString(str: string): string {
 
   // Redact emails (partially)
   sanitized = sanitized.replace(EMAIL_PATTERN, (email) => {
-    const [local, domain] = email.split("@");
-    const maskedLocal = local.substring(0, 2) + "***";
+    const parts = email.split("@");
+
+    if (parts.length !== 2) return "***@invalid";
+
+    const [local, domain] = parts;
+    const maskedLocal =
+      local.length >= 2 ? local.substring(0, 2) + "***" : "***";
 
     return `${maskedLocal}@${domain}`;
   });

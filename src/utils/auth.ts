@@ -4,7 +4,8 @@
  * Implements JWT with refresh tokens requirement
  */
 
-/* global fetch, atob, RequestInit */
+/* global fetch, atob, RequestInit, sessionStorage, console */
+/* eslint-disable no-console */
 
 export interface TokenPair {
   accessToken: string;
@@ -33,35 +34,67 @@ const REFRESH_TOKEN_KEY = "flash_fusion_refresh_token";
 export class TokenManager {
   /**
    * Store token pair in secure storage
+   *
+   * SECURITY NOTE: This implementation uses localStorage for demonstration.
+   * In production, you should:
+   * 1. Store refresh tokens in httpOnly, Secure, SameSite cookies (backend-managed)
+   * 2. Use sessionStorage for access tokens to limit XSS exposure window
+   * 3. Implement additional XSS protection (CSP, input sanitization)
+   *
+   * Example production cookie setup (backend):
+   * res.cookie('refreshToken', token, {
+   *   httpOnly: true,
+   *   secure: true,
+   *   sameSite: 'strict',
+   *   maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+   * });
    */
   static setTokens(tokens: TokenPair): void {
-    // Store refresh token in httpOnly cookie (server-side) or secure storage
-    // For client-side, use localStorage with awareness of XSS risks
-    localStorage.setItem(ACCESS_TOKEN_KEY, tokens.accessToken);
-    // In production, refresh token should be httpOnly cookie
-    localStorage.setItem(REFRESH_TOKEN_KEY, tokens.refreshToken);
+    // Use sessionStorage for access token (cleared on tab close)
+    sessionStorage.setItem(ACCESS_TOKEN_KEY, tokens.accessToken);
+
+    // In production, refresh token should ONLY be in httpOnly cookie
+    // For demo purposes only - DO NOT use in production without proper XSS protection
+    if (import.meta.env.DEV) {
+      localStorage.setItem(REFRESH_TOKEN_KEY, tokens.refreshToken);
+    } else {
+      // In production, rely on httpOnly cookie for refresh token
+      console.warn(
+        "Refresh token should be managed via httpOnly cookies in production",
+      );
+    }
   }
 
   /**
    * Get access token
    */
   static getAccessToken(): string | null {
-    return localStorage.getItem(ACCESS_TOKEN_KEY);
+    return sessionStorage.getItem(ACCESS_TOKEN_KEY);
   }
 
   /**
    * Get refresh token
+   * In production, this should retrieve from httpOnly cookie via API call
    */
   static getRefreshToken(): string | null {
-    return localStorage.getItem(REFRESH_TOKEN_KEY);
+    if (import.meta.env.DEV) {
+      return localStorage.getItem(REFRESH_TOKEN_KEY);
+    }
+
+    // In production, refresh token is in httpOnly cookie
+    // Backend will automatically include it in refresh requests
+    return null;
   }
 
   /**
    * Clear all tokens (logout)
    */
   static clearTokens(): void {
-    localStorage.removeItem(ACCESS_TOKEN_KEY);
-    localStorage.removeItem(REFRESH_TOKEN_KEY);
+    sessionStorage.removeItem(ACCESS_TOKEN_KEY);
+    if (import.meta.env.DEV) {
+      localStorage.removeItem(REFRESH_TOKEN_KEY);
+    }
+    // In production, also call backend to clear httpOnly cookie
   }
 
   /**

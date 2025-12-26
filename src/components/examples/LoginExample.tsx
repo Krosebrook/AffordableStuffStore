@@ -4,7 +4,7 @@
  */
 
 /* eslint-disable no-console */
-/* global console */
+/* global console, HTMLInputElement */
 
 import type React from "react";
 
@@ -84,7 +84,9 @@ export function LoginExample() {
           label="Email"
           type="email"
           value={email}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setEmail(e.target.value)
+          }
         />
 
         <Input
@@ -92,7 +94,9 @@ export function LoginExample() {
           label="Password"
           type="password"
           value={password}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPassword(e.target.value)
+          }
         />
 
         {errors.length > 0 && (

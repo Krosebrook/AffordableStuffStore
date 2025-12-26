@@ -40,12 +40,17 @@ export const ValidationPatterns = {
     .regex(/^\+?[1-9]\d{1,14}$/, "Invalid phone number format"),
 
   // Prevent XSS - sanitize user input
+  // Note: This is a basic check. For HTML content, use DOMPurify on the client
+  // or a robust sanitization library on the server
   safeString: z
     .string()
     .max(1000, "Input too long")
     .refine(
-      (val) => !/<script|javascript:|onerror=|onload=/i.test(val),
-      "Invalid input detected",
+      (val) =>
+        !/(<script|<iframe|javascript:|data:text\/html|on\w+\s*=|<object|<embed|<link)/i.test(
+          val,
+        ),
+      "Invalid input detected - potential XSS attempt",
     ),
 
   // SQL injection prevention - alphanumeric only
