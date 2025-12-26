@@ -67,6 +67,10 @@ export const siteConfig = () => ({
       href: "/settings",
     },
     {
+      label: i18next.t("monitoring"),
+      href: "/monitoring",
+    },
+    {
       label: i18next.t("help-and-feedback"),
       href: "/help-feedback",
     },
