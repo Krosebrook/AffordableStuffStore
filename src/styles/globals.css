@@ -1,3 +1,6 @@
+/* Import Google Fonts: Sora for display, Inter for UI */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @import "tailwindcss";
 @layer theme, base, components, utilities;
 
@@ -17,10 +20,264 @@
   
   /* HeroUI Integration */
   --background-image-gradient-border-violet: linear-gradient(hsl(var(--heroui-background)), hsl(var(--heroui-background))), linear-gradient(83.87deg, #F54180, #9353D3);
-  
-  /* FlashFusion Typography */
-  --font-family-display: 'Sora', sans-serif;
-  --font-family-ui: 'Inter', sans-serif;
-  --line-height-base: 1.5;
-  --spacing-grid: 8px;
+
+  /* 8pt Grid Spacing System */
+  --spacing-unit: 8px;
+  --spacing-0: 0;
+  --spacing-1: calc(var(--spacing-unit) * 0.5); /* 4px */
+  --spacing-2: var(--spacing-unit); /* 8px */
+  --spacing-3: calc(var(--spacing-unit) * 1.5); /* 12px */
+  --spacing-4: calc(var(--spacing-unit) * 2); /* 16px */
+  --spacing-5: calc(var(--spacing-unit) * 2.5); /* 20px */
+  --spacing-6: calc(var(--spacing-unit) * 3); /* 24px */
+  --spacing-8: calc(var(--spacing-unit) * 4); /* 32px */
+  --spacing-10: calc(var(--spacing-unit) * 5); /* 40px */
+  --spacing-12: calc(var(--spacing-unit) * 6); /* 48px */
+  --spacing-16: calc(var(--spacing-unit) * 8); /* 64px */
+  --spacing-20: calc(var(--spacing-unit) * 10); /* 80px */
+  --spacing-24: calc(var(--spacing-unit) * 12); /* 96px */
+  --spacing-32: calc(var(--spacing-unit) * 16); /* 128px */
+
+  /* Fluid Typography with Clamp Scale */
+  --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --font-size-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+  --font-size-base: clamp(1rem, 0.925rem + 0.375vw, 1.125rem);
+  --font-size-lg: clamp(1.125rem, 1rem + 0.625vw, 1.375rem);
+  --font-size-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.625rem);
+  --font-size-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --font-size-3xl: clamp(1.875rem, 1.6rem + 1.375vw, 2.625rem);
+  --font-size-4xl: clamp(2.25rem, 1.9rem + 1.75vw, 3.375rem);
+  --font-size-5xl: clamp(3rem, 2.5rem + 2.5vw, 4.5rem);
+
+  /* Typography Families */
+  --font-display: 'Sora', ui-sans-serif, system-ui, sans-serif;
+  --font-ui: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Line Heights for Better Readability (WCAG 2.2) */
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+}
+
+@layer base {
+  * {
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+
+  body {
+    font-family: var(--font-ui);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: var(--line-height-tight);
+  }
+
+  h1 {
+    font-size: var(--font-size-5xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-4xl);
+  }
+
+  h3 {
+    font-size: var(--font-size-3xl);
+  }
+
+  h4 {
+    font-size: var(--font-size-2xl);
+  }
+
+  h5 {
+    font-size: var(--font-size-xl);
+  }
+
+  h6 {
+    font-size: var(--font-size-lg);
+  }
+
+  /* WCAG 2.2 AA Contrast Requirements */
+  :root {
+    --min-contrast-ratio: 4.5;
+  }
+
+  /* Ensure focus indicators are visible (WCAG 2.2 AA) */
+  *:focus-visible {
+    outline-width: 2px;
+    outline-style: solid;
+    outline-offset: 2px;
+  }
+
+  /* Improve text spacing for readability (WCAG 1.4.12) */
+  p, li, td, th {
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+  }
+
+  p {
+    margin-bottom: var(--spacing-4);
+  }
+
+  /* Better touch targets (WCAG 2.5.5) */
+  button, a, input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@layer components {
+  /* Skeleton Loader with Shimmer Effect */
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: hsl(var(--heroui-default-200));
+    border-radius: 0.5rem;
+  }
+
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    animation: shimmer 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .skeleton-text {
+    position: relative;
+    overflow: hidden;
+    background-color: hsl(var(--heroui-default-200));
+    height: 1em;
+    width: 100%;
+    border-radius: 0.25rem;
+  }
+
+  .skeleton-text::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    animation: shimmer 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  .skeleton-avatar {
+    position: relative;
+    overflow: hidden;
+    background-color: hsl(var(--heroui-default-200));
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+  }
+
+  .skeleton-avatar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    animation: shimmer 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  .skeleton-card {
+    position: relative;
+    overflow: hidden;
+    background-color: hsl(var(--heroui-default-200));
+    border-radius: 0.5rem;
+    width: 100%;
+    height: 12rem;
+  }
+
+  .skeleton-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    animation: shimmer 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+}
+
+@layer utilities {
+  /* 8pt Grid Spacing Utilities */
+  .space-1 { margin: var(--spacing-1); }
+  .space-2 { margin: var(--spacing-2); }
+  .space-3 { margin: var(--spacing-3); }
+  .space-4 { margin: var(--spacing-4); }
+  .space-5 { margin: var(--spacing-5); }
+  .space-6 { margin: var(--spacing-6); }
+  .space-8 { margin: var(--spacing-8); }
+  .space-10 { margin: var(--spacing-10); }
+  .space-12 { margin: var(--spacing-12); }
+  .space-16 { margin: var(--spacing-16); }
+  .space-20 { margin: var(--spacing-20); }
+  .space-24 { margin: var(--spacing-24); }
+  .space-32 { margin: var(--spacing-32); }
+
+  /* Typography Utilities */
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-ui {
+    font-family: var(--font-ui);
+  }
+
+  /* Fluid Text Sizes */
+  .text-fluid-xs { font-size: var(--font-size-xs); }
+  .text-fluid-sm { font-size: var(--font-size-sm); }
+  .text-fluid-base { font-size: var(--font-size-base); }
+  .text-fluid-lg { font-size: var(--font-size-lg); }
+  .text-fluid-xl { font-size: var(--font-size-xl); }
+  .text-fluid-2xl { font-size: var(--font-size-2xl); }
+  .text-fluid-3xl { font-size: var(--font-size-3xl); }
+  .text-fluid-4xl { font-size: var(--font-size-4xl); }
+  .text-fluid-5xl { font-size: var(--font-size-5xl); }
 }

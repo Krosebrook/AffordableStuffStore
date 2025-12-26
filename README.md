@@ -1,39 +1,319 @@
-# FlashFusion - AI-Powered Creative Mega App
+# FlashFusion Core Architecture
 
-FlashFusion is a production-grade SaaS platform for AI-powered content generation, campaign management, and multi-channel publishing. Built with Next.js 15, Supabase, and Edge workers, incorporating 15+ years of context engineering best practices.
+> **⚠️ Architecture Transformation**: This repository has been migrated from a Vite + React template to the **FlashFusion Core Architecture** - a production-ready, enterprise-grade application framework.
 
-## Overview
+## 🎯 What is FlashFusion?
 
-FlashFusion empowers creators, agencies, and teams to build AI-powered content workflows at scale with:
+FlashFusion is a modern, full-stack application architecture that combines the best tools and practices for building scalable, secure, and observable applications.
 
-- **Modular Prompt Builder**: 30+ presets, searchable combobox, live token estimates, .ffpack.json export
-- **Content Studio**: Generate text/image/video/music with brand kit validation
-- **Campaign Wizard**: Multi-channel scheduling with retry logic
-- **Marketplace**: Browse/remix/submit prompt packs
-- **Public Prompt Library**: User-submitted prompts with voting, search, tags
+### Key Features
 
-## Architecture
+- ⚡ **Next.js 15** with App Router and React Server Components
+- 🎨 **Tailwind CSS v4** with custom FlashFusion brand colors
+- 🧩 **shadcn/ui** component library for consistent UI
+- 📦 **Turborepo + PNPM** monorepo for efficient builds
+- 🔐 **Supabase** for authentication, database, and storage
+- 👷 **Worker Services** for background processing
+- 📊 **Full Observability** with Sentry, PostHog, and OpenTelemetry
+- 🧪 **Complete Testing** with Vitest and Playwright
+- 🛡️ **Enterprise Security** with RLS, CSP, and CSRF protection
 
-- **Monorepo**: Turborepo + PNPM
-- **Frontend**: Next.js App Router, Tailwind v4, shadcn/ui, Framer Motion
-- **Backend**: Supabase (Auth, Postgres+RLS, Storage)
-- **Workers**: render.ts (asset generation), schedule.ts (CRON posting), insights.ts (segmentation)
-- **Deploy**: Vercel Edge Functions
-- **Observability**: Sentry + PostHog + OpenTelemetry
+## 📖 Documentation
 
-## Key Features
+For complete documentation, see **[FLASHFUSION.md](./FLASHFUSION.md)**
 
-### 1. Modular Prompt Builder
-- 30+ prompt presets for different content types
-- Searchable combobox for quick selection
-- Live token estimation
-- Export prompts as .ffpack.json
+## 🚀 Quick Start
 
-### 2. Content Studio
-- Multi-modal content generation (text, image, video, music)
-- Brand kit validation and consistency checking
-- Asset preview and editing
-- Provenance logging (model, prompt_hash, dataset_tag)
+```bash
+# Install dependencies
+pnpm install
+
+# Start development
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Run tests
+pnpm test
+pnpm test:e2e
+```
+
+## 🏗️ Architecture Overview
+
+```
+flashfusion/
+├── apps/
+│   ├── web/              # Next.js application
+│   └── workers/          # Background workers
+│       ├── render/       # Render processing
+│       ├── schedule/     # Task scheduling
+│       └── insights/     # Analytics
+├── packages/
+│   ├── ui/               # Shared UI components
+│   ├── config/           # Shared configurations
+│   └── shared/           # Utilities
+└── supabase/
+    └── migrations/       # Database schema
+```
+
+## 🎨 Brand Colors
+
+FlashFusion uses a vibrant, modern color palette:
+
+- **Primary**: `#FF7B00` - Energetic orange
+- **Secondary**: `#00B4D8` - Fresh blue
+- **Accent**: `#E91E63` - Bold pink
+
+Access these in your code via CSS variables:
+```css
+color: var(--color-ff-primary);
+color: var(--color-ff-secondary);
+color: var(--color-ff-accent);
+```
+
+## 🔐 Security First
+
+FlashFusion is built with security as a priority:
+
+- ✅ Row Level Security (RLS) policies on all tables
+- ✅ Content Security Policy (CSP) headers
+- ✅ CSRF token protection
+- ✅ Secure environment variable management
+- ✅ Regular secrets rotation support
+
+## 📊 Built-in Observability
+
+Monitor your application with confidence:
+
+- **Sentry**: Error tracking and performance monitoring
+- **PostHog**: Product analytics and feature flags
+- **OpenTelemetry**: Distributed tracing
+
+## 🧪 Testing Strategy
+
+Comprehensive testing setup:
+
+- **Vitest**: Fast unit and integration tests
+- **Playwright**: Reliable end-to-end testing
+- **Coverage**: Track test coverage automatically
+
+## 🚢 Deployment
+
+Optimized for Vercel Edge deployment:
+
+1. Connect repository to Vercel
+2. Configure environment variables
+3. Deploy automatically on push
+
+Workers can be deployed separately to any Node.js hosting platform.
+
+## 📚 Technologies
+
+### Frontend
+- Next.js 15
+- React 19
+- Tailwind CSS v4
+- shadcn/ui
+- Framer Motion
+
+### Backend
+- Supabase (PostgreSQL)
+- Row Level Security
+- Real-time subscriptions
+- Storage
+
+### Infrastructure
+- Turborepo
+- PNPM workspaces
+- Vercel Edge Runtime
+
+### Observability
+- Sentry
+- PostHog
+- OpenTelemetry
+
+### Testing
+- Vitest
+- Playwright
+- React Testing Library
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our contributing guidelines in [FLASHFUSION.md](./FLASHFUSION.md).
+
+## 📝 License
+
+MIT License - see LICENSE file for details
+
+---
+
+## Migration Notes
+
+### What Changed?
+
+This repository was previously a Vite + React template. It has been transformed into the FlashFusion Core Architecture with:
+
+- ✅ Monorepo structure with Turborepo
+- ✅ Next.js 15 replacing Vite
+- ✅ shadcn/ui replacing HeroUI
+- ✅ Supabase backend integration
+- ✅ Worker services for background tasks
+- ✅ Full observability stack
+- ✅ Comprehensive testing setup
+- ✅ Enterprise security features
+
+### Old Files
+
+Some old configuration files are now deprecated:
+- `index.html` (Next.js handles this)
+- `vite.config.ts` (Using Next.js config)
+- HeroUI components (Replaced with shadcn/ui)
+
+These are ignored in `.gitignore` but remain for reference.
+
+---
+
+**Built with ❤️ using the FlashFusion Core Architecture**
+
+
+## Adding a New Page
+
+This section explains how to create a new page with the default layout and add it to the navigation menus.
+
+### 1. Create the Page Component
+
+First, create a new file in the `src/pages` directory. For example, let's create a "Contact" page:
+
+```tsx
+// filepath: src/pages/contact.tsx
+import { Trans, useTranslation } from "react-i18next";
+import { title } from "@/components/primitives";
+import DefaultLayout from "@/layouts/default";
+
+export default function ContactPage() {
+  const { t } = useTranslation();
+
+  return (
+    <DefaultLayout>
+      <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+        <div className="inline-block max-w-lg text-center justify-center">
+          <h1 className={title()}>
+            <Trans t={t}>contact</Trans>
+          </h1>
+          <p className="mt-4 text-default-600">
+            This is the contact page content. You can add your contact form or information here.
+          </p>
+        </div>
+      </section>
+    </DefaultLayout>
+  );
+}
+```
+
+### 2. Add Translation Keys
+
+Add the new page's translation key to each language file in the `src/locales/base` directory:
+
+```jsonc
+// Add to each language JSON file (en-US.json, fr-FR.json, etc.)
+{
+  // ... existing translations
+  "contact": "Contact" // For English - adjust for other languages
+}
+```
+
+### 3. Add the Route
+
+Update the `App.tsx` file to include a route for your new page:
+
+```tsx
+// filepath: src/App.tsx
+import ContactPage from "@/pages/contact";
+
+function App() {
+  return (
+    <CookieConsentProvider>
+      <CookieConsent />
+      <Routes>
+        <Route element={<IndexPage />} path="/" />
+        <Route element={<DocsPage />} path="/docs" />
+        <Route element={<PricingPage />} path="/pricing" />
+        <Route element={<BlogPage />} path="/blog" />
+        <Route element={<AboutPage />} path="/about" />
+        {/* Add the new route */}
+        <Route element={<ContactPage />} path="/contact" />
+      </Routes>
+    </CookieConsentProvider>
+  );
+}
+```
+
+### 4. Add to Navigation Menus
+
+Update the `src/config/site.ts` file to include your new page in both the desktop navigation and mobile menu:
+
+```typescript
+// filepath: src/config/site.ts
+export const siteConfig = () => ({
+  // ... existing config
+  navItems: [
+    {
+      label: i18next.t("home"),
+      href: "/",
+    },
+    {
+      label: i18next.t("docs"),
+      href: "/docs",
+    },
+    {
+      label: i18next.t("pricing"),
+      href: "/pricing",
+    },
+    {
+      label: i18next.t("blog"),
+      href: "/blog",
+    },
+    {
+      label: i18next.t("about"),
+      href: "/about",
+    },
+    // Add the new page to desktop navigation
+    {
+      label: i18next.t("contact"),
+      href: "/contact",
+    },
+  ],
+  navMenuItems: [
+    {
+      label: i18next.t("profile"),
+      href: "/profile",
+    },
+    // ... other mobile menu items
+    
+    // Add the new page to mobile menu (before logout)
+    {
+      label: i18next.t("contact"),
+      href: "/contact",
+    },
+    {
+      label: i18next.t("logout"),
+      href: "/logout",
+    },
+  ],
+  // ... rest of config
+});
+```
+
+### 5. Test Your New Page
+
+Start your development server and verify that:
+
+- The new page is accessible via its route (e.g., <http://localhost:5173/contact>)
+- The page appears in both desktop and mobile navigation menus
+- The page title is correctly translated based on the selected language
+
+That's it! You've successfully added a new page with the default layout and included it in the navigation menus.
 
 ### 3. Campaign Wizard
 - Multi-channel scheduling (social media, email, blog)

@@ -9,11 +9,7 @@ import DocsPage from "@/pages/docs";
 import PricingPage from "@/pages/pricing";
 import BlogPage from "@/pages/blog";
 import AboutPage from "@/pages/about";
-import PromptBuilderPage from "@/pages/prompt-builder";
-import ContentStudioPage from "@/pages/content-studio";
-import CampaignsPage from "@/pages/campaigns";
-import MarketplacePage from "@/pages/marketplace";
-import PromptsPage from "@/pages/prompts";
+import FlashFusionPage from "@/pages/flashfusion";
 
 function App() {
   return (
@@ -30,6 +26,7 @@ function App() {
         <Route element={<PricingPage />} path="/pricing" />
         <Route element={<BlogPage />} path="/blog" />
         <Route element={<AboutPage />} path="/about" />
+        <Route element={<FlashFusionPage />} path="/flashfusion" />
         <Route element={<PageNotFound />} path="*" />
       </Routes>
     </CookieConsentProvider>
