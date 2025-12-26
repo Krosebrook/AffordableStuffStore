@@ -1,6 +1,7 @@
 import { Button } from "@heroui/button";
 import { Link } from "@heroui/link";
 import { Trans, useTranslation } from "react-i18next";
+
 import { FFPackWithStats } from "@/types";
 
 interface PackCardProps {
@@ -11,18 +12,20 @@ interface PackCardProps {
 export function PackCard({ pack, featured = false }: PackCardProps) {
   const { t } = useTranslation();
 
-  const handleVote = (type: "up" | "down") => {
+  const handleVote = (_type: "up" | "down") => {
     // In a real implementation, this would call an API
-    console.log(`Voted ${type} on pack ${pack.id}`);
+    // Vote on pack ${pack.id} with type ${type}
   };
 
   const handleRemix = () => {
     // In a real implementation, this would clone the pack and redirect to editor
-    console.log(`Remixing pack ${pack.id}`);
+    window.location.href = `/pack-editor?remix=${pack.id}`;
   };
 
   return (
-    <div className={`border rounded-lg p-6 hover:shadow-lg transition-shadow ${featured ? 'bg-gradient-to-br from-primary-50 to-secondary-50' : 'bg-content1'}`}>
+    <div
+      className={`border rounded-lg p-6 hover:shadow-lg transition-shadow ${featured ? "bg-gradient-to-br from-primary-50 to-secondary-50" : "bg-content1"}`}
+    >
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
@@ -45,10 +48,10 @@ export function PackCard({ pack, featured = false }: PackCardProps) {
       {/* Author */}
       <div className="flex items-center gap-2 mb-4">
         {pack.authorAvatar && (
-          <img 
-            src={pack.authorAvatar} 
+          <img
             alt={pack.metadata.author}
             className="w-8 h-8 rounded-full"
+            src={pack.authorAvatar}
           />
         )}
         <span className="text-sm text-default-600">{pack.metadata.author}</span>
@@ -57,7 +60,10 @@ export function PackCard({ pack, featured = false }: PackCardProps) {
       {/* Tags */}
       <div className="flex flex-wrap gap-2 mb-4">
         {pack.metadata.tags.slice(0, 3).map((tag, index) => (
-          <span key={index} className="text-xs bg-default-100 px-2 py-1 rounded">
+          <span
+            key={index}
+            className="text-xs bg-default-100 px-2 py-1 rounded"
+          >
             {tag}
           </span>
         ))}
@@ -75,18 +81,18 @@ export function PackCard({ pack, featured = false }: PackCardProps) {
 
       {/* Voting */}
       <div className="flex items-center gap-4 mb-4">
-        <Button 
-          size="sm" 
-          variant="flat" 
+        <Button
           color="success"
+          size="sm"
+          variant="flat"
           onClick={() => handleVote("up")}
         >
           ▲ {pack.upvotes}
         </Button>
-        <Button 
-          size="sm" 
-          variant="flat" 
+        <Button
           color="danger"
+          size="sm"
+          variant="flat"
           onClick={() => handleVote("down")}
         >
           ▼ {pack.downvotes}
@@ -95,12 +101,7 @@ export function PackCard({ pack, featured = false }: PackCardProps) {
 
       {/* Actions */}
       <div className="flex gap-2">
-        <Button 
-          size="sm" 
-          color="primary" 
-          variant="solid"
-          onClick={handleRemix}
-        >
+        <Button color="primary" size="sm" variant="solid" onClick={handleRemix}>
           <Trans t={t}>remix</Trans>
         </Button>
         <Link href={`/marketplace/${pack.id}`}>

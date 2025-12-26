@@ -16,8 +16,18 @@ const mockPacks: FFPackWithStats[] = [
     name: "E-commerce Starter",
     version: "1.2.0",
     templates: [
-      { id: "t1", name: "Product Page", content: "Product template content", variables: ["title", "price"] },
-      { id: "t2", name: "Cart Page", content: "Cart template content", variables: ["items"] },
+      {
+        id: "t1",
+        name: "Product Page",
+        content: "Product template content",
+        variables: ["title", "price"],
+      },
+      {
+        id: "t2",
+        name: "Cart Page",
+        content: "Cart template content",
+        variables: ["items"],
+      },
     ],
     brand_kit: {
       colors: { primary: "#4F46E5", secondary: "#10B981", accent: "#F59E0B" },
@@ -38,8 +48,18 @@ const mockPacks: FFPackWithStats[] = [
     downvotes: 3,
     authorAvatar: "https://i.pravatar.cc/150?img=1",
     versionHistory: [
-      { version: "1.2.0", timestamp: "2025-03-20T14:30:00Z", changes: "Added cart page template", pack: {} as FFPack },
-      { version: "1.1.0", timestamp: "2025-02-10T09:15:00Z", changes: "Updated brand kit colors", pack: {} as FFPack },
+      {
+        version: "1.2.0",
+        timestamp: "2025-03-20T14:30:00Z",
+        changes: "Added cart page template",
+        pack: {} as FFPack,
+      },
+      {
+        version: "1.1.0",
+        timestamp: "2025-02-10T09:15:00Z",
+        changes: "Updated brand kit colors",
+        pack: {} as FFPack,
+      },
     ],
     isFeatured: true,
   },
@@ -48,11 +68,26 @@ const mockPacks: FFPackWithStats[] = [
     name: "Blog Theme Pro",
     version: "2.0.1",
     templates: [
-      { id: "t3", name: "Blog Post", content: "Blog post template", variables: ["title", "content", "author"] },
-      { id: "t4", name: "Author Bio", content: "Author bio template", variables: ["name", "bio"] },
+      {
+        id: "t3",
+        name: "Blog Post",
+        content: "Blog post template",
+        variables: ["title", "content", "author"],
+      },
+      {
+        id: "t4",
+        name: "Author Bio",
+        content: "Author bio template",
+        variables: ["name", "bio"],
+      },
     ],
     assets: [
-      { id: "a2", name: "Header Image", type: "image/jpeg", url: "/assets/header.jpg" },
+      {
+        id: "a2",
+        name: "Header Image",
+        type: "image/jpeg",
+        url: "/assets/header.jpg",
+      },
     ],
     metadata: {
       author: "Jane Smith",
@@ -66,7 +101,12 @@ const mockPacks: FFPackWithStats[] = [
     downvotes: 2,
     authorAvatar: "https://i.pravatar.cc/150?img=2",
     versionHistory: [
-      { version: "2.0.1", timestamp: "2025-03-15T16:45:00Z", changes: "Bug fixes", pack: {} as FFPack },
+      {
+        version: "2.0.1",
+        timestamp: "2025-03-15T16:45:00Z",
+        changes: "Bug fixes",
+        pack: {} as FFPack,
+      },
     ],
   },
 ];
@@ -77,15 +117,20 @@ export default function MarketplacePage() {
   const [filter, setFilter] = useState<"all" | "public" | "private">("all");
 
   const filteredPacks = mockPacks.filter((pack) => {
-    const matchesSearch = pack.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      pack.metadata.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    const matchesFilter = filter === "all" || 
+    const matchesSearch =
+      pack.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      pack.metadata.tags.some((tag) =>
+        tag.toLowerCase().includes(searchTerm.toLowerCase()),
+      );
+    const matchesFilter =
+      filter === "all" ||
       (filter === "public" && pack.isPublic) ||
       (filter === "private" && !pack.isPublic);
+
     return matchesSearch && matchesFilter;
   });
 
-  const featuredPack = mockPacks.find(pack => pack.isFeatured);
+  const featuredPack = mockPacks.find((pack) => pack.isFeatured);
 
   return (
     <DefaultLayout>
@@ -106,7 +151,7 @@ export default function MarketplacePage() {
               <Trans t={t}>featured-pack-of-the-day</Trans>
             </h2>
             <div className="border-2 border-primary rounded-lg p-1">
-              <PackCard pack={featuredPack} featured />
+              <PackCard featured pack={featuredPack} />
             </div>
           </div>
         )}
@@ -147,9 +192,7 @@ export default function MarketplacePage() {
         {/* Pack Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredPacks.length > 0 ? (
-            filteredPacks.map((pack) => (
-              <PackCard key={pack.id} pack={pack} />
-            ))
+            filteredPacks.map((pack) => <PackCard key={pack.id} pack={pack} />)
           ) : (
             <div className="col-span-full text-center py-12">
               <p className="text-default-500">

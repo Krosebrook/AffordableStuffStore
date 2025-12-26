@@ -9,25 +9,25 @@ import { FFPack, FFPackTemplate, FFPackAsset } from "@/types";
 
 export default function PromptBuilderPage() {
   const { t } = useTranslation();
-  
+
   const [packName, setPackName] = useState("");
   const [packVersion, setPackVersion] = useState("1.0.0");
   const [author, setAuthor] = useState("");
   const [tags, setTags] = useState("");
   const [license, setLicense] = useState("MIT");
-  
+
   const [templates, setTemplates] = useState<FFPackTemplate[]>([]);
   const [newTemplateName, setNewTemplateName] = useState("");
   const [newTemplateContent, setNewTemplateContent] = useState("");
   const [newTemplateVariables, setNewTemplateVariables] = useState("");
-  
+
   const [primaryColor, setPrimaryColor] = useState("#4F46E5");
   const [secondaryColor, setSecondaryColor] = useState("#10B981");
   const [accentColor, setAccentColor] = useState("#F59E0B");
   const [headingFont, setHeadingFont] = useState("Inter");
   const [bodyFont, setBodyFont] = useState("Roboto");
   const [logoUrl, setLogoUrl] = useState("");
-  
+
   const [assets, setAssets] = useState<FFPackAsset[]>([]);
   const [newAssetName, setNewAssetName] = useState("");
   const [newAssetType, setNewAssetType] = useState("image/png");
@@ -35,14 +35,16 @@ export default function PromptBuilderPage() {
 
   const handleAddTemplate = () => {
     if (!newTemplateName || !newTemplateContent) return;
-    
+
     const template: FFPackTemplate = {
       id: `t${templates.length + 1}`,
       name: newTemplateName,
       content: newTemplateContent,
-      variables: newTemplateVariables ? newTemplateVariables.split(",").map(v => v.trim()) : [],
+      variables: newTemplateVariables
+        ? newTemplateVariables.split(",").map((v) => v.trim())
+        : [],
     };
-    
+
     setTemplates([...templates, template]);
     setNewTemplateName("");
     setNewTemplateContent("");
@@ -50,19 +52,19 @@ export default function PromptBuilderPage() {
   };
 
   const handleRemoveTemplate = (id: string) => {
-    setTemplates(templates.filter(t => t.id !== id));
+    setTemplates(templates.filter((t) => t.id !== id));
   };
 
   const handleAddAsset = () => {
     if (!newAssetName || !newAssetUrl) return;
-    
+
     const asset: FFPackAsset = {
       id: `a${assets.length + 1}`,
       name: newAssetName,
       type: newAssetType,
       url: newAssetUrl,
     };
-    
+
     setAssets([...assets, asset]);
     setNewAssetName("");
     setNewAssetType("image/png");
@@ -70,12 +72,13 @@ export default function PromptBuilderPage() {
   };
 
   const handleRemoveAsset = (id: string) => {
-    setAssets(assets.filter(a => a.id !== id));
+    setAssets(assets.filter((a) => a.id !== id));
   };
 
   const handleExport = () => {
     if (!packName || !author) {
-      alert("Please fill in pack name and author");
+      window.alert("Please fill in pack name and author");
+
       return;
     }
 
@@ -98,7 +101,10 @@ export default function PromptBuilderPage() {
       assets,
       metadata: {
         author,
-        tags: tags.split(",").map(t => t.trim()).filter(t => t),
+        tags: tags
+          .split(",")
+          .map((t) => t.trim())
+          .filter((t) => t),
         license,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
@@ -106,12 +112,14 @@ export default function PromptBuilderPage() {
     };
 
     const dataStr = JSON.stringify(pack, null, 2);
-    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-    const exportFileDefaultName = `${packName.toLowerCase().replace(/\s+/g, '-')}.ffpack.json`;
-    
-    const linkElement = document.createElement('a');
-    linkElement.setAttribute('href', dataUri);
-    linkElement.setAttribute('download', exportFileDefaultName);
+    const dataUri =
+      "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
+    const exportFileDefaultName = `${packName.toLowerCase().replace(/\s+/g, "-")}.ffpack.json`;
+
+    const linkElement = document.createElement("a");
+
+    linkElement.setAttribute("href", dataUri);
+    linkElement.setAttribute("download", exportFileDefaultName);
     linkElement.click();
   };
 
@@ -132,22 +140,22 @@ export default function PromptBuilderPage() {
           <h2 className="text-xl font-bold mb-4">Basic Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Input
+              isRequired
               label={t("pack-name")}
               value={packName}
               onChange={(e) => setPackName(e.target.value)}
-              isRequired
             />
             <Input
+              isRequired
               label={t("pack-version")}
               value={packVersion}
               onChange={(e) => setPackVersion(e.target.value)}
-              isRequired
             />
             <Input
+              isRequired
               label={t("author")}
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
-              isRequired
             />
             <Input
               label={t("license")}
@@ -155,11 +163,11 @@ export default function PromptBuilderPage() {
               onChange={(e) => setLicense(e.target.value)}
             />
             <Input
+              className="md:col-span-2"
               label={t("tags")}
               placeholder="tag1, tag2, tag3"
               value={tags}
               onChange={(e) => setTags(e.target.value)}
-              className="md:col-span-2"
             />
           </div>
         </div>
@@ -169,23 +177,28 @@ export default function PromptBuilderPage() {
           <h2 className="text-xl font-bold mb-4">
             <Trans t={t}>templates</Trans>
           </h2>
-          
+
           <div className="space-y-4 mb-4">
             {templates.map((template) => (
-              <div key={template.id} className="border rounded-lg p-4 bg-default-50">
+              <div
+                key={template.id}
+                className="border rounded-lg p-4 bg-default-50"
+              >
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex-1">
                     <h3 className="font-semibold">{template.name}</h3>
-                    <p className="text-sm text-default-600 mt-1">{template.content}</p>
+                    <p className="text-sm text-default-600 mt-1">
+                      {template.content}
+                    </p>
                     {template.variables && template.variables.length > 0 && (
                       <p className="text-xs text-default-500 mt-2">
                         Variables: {template.variables.join(", ")}
                       </p>
                     )}
                   </div>
-                  <Button 
-                    size="sm" 
-                    color="danger" 
+                  <Button
+                    color="danger"
+                    size="sm"
                     variant="flat"
                     onClick={() => handleRemoveTemplate(template.id)}
                   >
@@ -230,7 +243,7 @@ export default function PromptBuilderPage() {
           <h2 className="text-xl font-bold mb-4">
             <Trans t={t}>configure-brand-kit</Trans>
           </h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="text-sm mb-2 block">
@@ -238,10 +251,10 @@ export default function PromptBuilderPage() {
               </label>
               <div className="flex items-center gap-2">
                 <input
+                  className="w-12 h-12 border rounded cursor-pointer"
                   type="color"
                   value={primaryColor}
                   onChange={(e) => setPrimaryColor(e.target.value)}
-                  className="w-12 h-12 border rounded cursor-pointer"
                 />
                 <Input
                   value={primaryColor}
@@ -249,17 +262,17 @@ export default function PromptBuilderPage() {
                 />
               </div>
             </div>
-            
+
             <div>
               <label className="text-sm mb-2 block">
                 <Trans t={t}>secondary-color</Trans>
               </label>
               <div className="flex items-center gap-2">
                 <input
+                  className="w-12 h-12 border rounded cursor-pointer"
                   type="color"
                   value={secondaryColor}
                   onChange={(e) => setSecondaryColor(e.target.value)}
-                  className="w-12 h-12 border rounded cursor-pointer"
                 />
                 <Input
                   value={secondaryColor}
@@ -267,17 +280,17 @@ export default function PromptBuilderPage() {
                 />
               </div>
             </div>
-            
+
             <div>
               <label className="text-sm mb-2 block">
                 <Trans t={t}>accent-color</Trans>
               </label>
               <div className="flex items-center gap-2">
                 <input
+                  className="w-12 h-12 border rounded cursor-pointer"
                   type="color"
                   value={accentColor}
                   onChange={(e) => setAccentColor(e.target.value)}
-                  className="w-12 h-12 border rounded cursor-pointer"
                 />
                 <Input
                   value={accentColor}
@@ -285,19 +298,19 @@ export default function PromptBuilderPage() {
                 />
               </div>
             </div>
-            
+
             <Input
               label={t("logo-url")}
               value={logoUrl}
               onChange={(e) => setLogoUrl(e.target.value)}
             />
-            
+
             <Input
               label={t("heading-font")}
               value={headingFont}
               onChange={(e) => setHeadingFont(e.target.value)}
             />
-            
+
             <Input
               label={t("body-font")}
               value={bodyFont}
@@ -311,19 +324,22 @@ export default function PromptBuilderPage() {
           <h2 className="text-xl font-bold mb-4">
             <Trans t={t}>assets</Trans>
           </h2>
-          
+
           <div className="space-y-4 mb-4">
             {assets.map((asset) => (
-              <div key={asset.id} className="border rounded-lg p-4 bg-default-50">
+              <div
+                key={asset.id}
+                className="border rounded-lg p-4 bg-default-50"
+              >
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="font-semibold">{asset.name}</h3>
                     <p className="text-sm text-default-600">{asset.type}</p>
                     <p className="text-xs text-default-500">{asset.url}</p>
                   </div>
-                  <Button 
-                    size="sm" 
-                    color="danger" 
+                  <Button
+                    color="danger"
+                    size="sm"
                     variant="flat"
                     onClick={() => handleRemoveAsset(asset.id)}
                   >

@@ -14,8 +14,18 @@ const mockPacks: FFPackWithStats[] = [
     name: "E-commerce Starter",
     version: "1.2.0",
     templates: [
-      { id: "t1", name: "Product Page", content: "Product template content", variables: ["title", "price"] },
-      { id: "t2", name: "Cart Page", content: "Cart template content", variables: ["items"] },
+      {
+        id: "t1",
+        name: "Product Page",
+        content: "Product template content",
+        variables: ["title", "price"],
+      },
+      {
+        id: "t2",
+        name: "Cart Page",
+        content: "Cart template content",
+        variables: ["items"],
+      },
     ],
     brand_kit: {
       colors: { primary: "#4F46E5", secondary: "#10B981", accent: "#F59E0B" },
@@ -36,23 +46,42 @@ const mockPacks: FFPackWithStats[] = [
     downvotes: 3,
     authorAvatar: "https://i.pravatar.cc/150?img=1",
     versionHistory: [
-      { 
-        version: "1.2.0", 
-        timestamp: "2025-03-20T14:30:00Z", 
-        changes: "Added cart page template", 
+      {
+        version: "1.2.0",
+        timestamp: "2025-03-20T14:30:00Z",
+        changes: "Added cart page template",
         pack: {
           name: "E-commerce Starter",
           version: "1.2.0",
           templates: [
-            { id: "t1", name: "Product Page", content: "Product template content", variables: ["title", "price"] },
-            { id: "t2", name: "Cart Page", content: "Cart template content", variables: ["items"] },
+            {
+              id: "t1",
+              name: "Product Page",
+              content: "Product template content",
+              variables: ["title", "price"],
+            },
+            {
+              id: "t2",
+              name: "Cart Page",
+              content: "Cart template content",
+              variables: ["items"],
+            },
           ],
           brand_kit: {
-            colors: { primary: "#4F46E5", secondary: "#10B981", accent: "#F59E0B" },
+            colors: {
+              primary: "#4F46E5",
+              secondary: "#10B981",
+              accent: "#F59E0B",
+            },
             fonts: { heading: "Inter", body: "Roboto" },
           },
           assets: [
-            { id: "a1", name: "Logo", type: "image/png", url: "/assets/logo.png" },
+            {
+              id: "a1",
+              name: "Logo",
+              type: "image/png",
+              url: "/assets/logo.png",
+            },
           ],
           metadata: {
             author: "John Doe",
@@ -61,24 +90,38 @@ const mockPacks: FFPackWithStats[] = [
             createdAt: "2025-01-15T10:00:00Z",
             updatedAt: "2025-03-20T14:30:00Z",
           },
-        }
+        },
       },
-      { 
-        version: "1.1.0", 
-        timestamp: "2025-02-10T09:15:00Z", 
-        changes: "Updated brand kit colors", 
+      {
+        version: "1.1.0",
+        timestamp: "2025-02-10T09:15:00Z",
+        changes: "Updated brand kit colors",
         pack: {
           name: "E-commerce Starter",
           version: "1.1.0",
           templates: [
-            { id: "t1", name: "Product Page", content: "Product template content", variables: ["title", "price"] },
+            {
+              id: "t1",
+              name: "Product Page",
+              content: "Product template content",
+              variables: ["title", "price"],
+            },
           ],
           brand_kit: {
-            colors: { primary: "#3B82F6", secondary: "#10B981", accent: "#F59E0B" },
+            colors: {
+              primary: "#3B82F6",
+              secondary: "#10B981",
+              accent: "#F59E0B",
+            },
             fonts: { heading: "Inter", body: "Roboto" },
           },
           assets: [
-            { id: "a1", name: "Logo", type: "image/png", url: "/assets/logo.png" },
+            {
+              id: "a1",
+              name: "Logo",
+              type: "image/png",
+              url: "/assets/logo.png",
+            },
           ],
           metadata: {
             author: "John Doe",
@@ -87,17 +130,22 @@ const mockPacks: FFPackWithStats[] = [
             createdAt: "2025-01-15T10:00:00Z",
             updatedAt: "2025-02-10T09:15:00Z",
           },
-        }
+        },
       },
-      { 
-        version: "1.0.0", 
-        timestamp: "2025-01-15T10:00:00Z", 
-        changes: "Initial release", 
+      {
+        version: "1.0.0",
+        timestamp: "2025-01-15T10:00:00Z",
+        changes: "Initial release",
         pack: {
           name: "E-commerce Starter",
           version: "1.0.0",
           templates: [
-            { id: "t1", name: "Product Page", content: "Product template content", variables: ["title", "price"] },
+            {
+              id: "t1",
+              name: "Product Page",
+              content: "Product template content",
+              variables: ["title", "price"],
+            },
           ],
           brand_kit: {
             colors: { primary: "#3B82F6", secondary: "#10B981" },
@@ -111,7 +159,7 @@ const mockPacks: FFPackWithStats[] = [
             createdAt: "2025-01-15T10:00:00Z",
             updatedAt: "2025-01-15T10:00:00Z",
           },
-        }
+        },
       },
     ],
   },
@@ -120,8 +168,8 @@ const mockPacks: FFPackWithStats[] = [
 export default function PackDetailPage() {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
-  
-  const pack = mockPacks.find(p => p.id === id);
+
+  const pack = mockPacks.find((p) => p.id === id);
 
   if (!pack) {
     return (
@@ -143,12 +191,14 @@ export default function PackDetailPage() {
       metadata: pack.metadata,
     };
     const dataStr = JSON.stringify(packJson, null, 2);
-    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-    const exportFileDefaultName = `${pack.name.toLowerCase().replace(/\s+/g, '-')}.ffpack.json`;
-    
-    const linkElement = document.createElement('a');
-    linkElement.setAttribute('href', dataUri);
-    linkElement.setAttribute('download', exportFileDefaultName);
+    const dataUri =
+      "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
+    const exportFileDefaultName = `${pack.name.toLowerCase().replace(/\s+/g, "-")}.ffpack.json`;
+
+    const linkElement = document.createElement("a");
+
+    linkElement.setAttribute("href", dataUri);
+    linkElement.setAttribute("download", exportFileDefaultName);
     linkElement.click();
   };
 
@@ -190,22 +240,27 @@ export default function PackDetailPage() {
           {/* Author */}
           <div className="flex items-center gap-2 mb-4">
             {pack.authorAvatar && (
-              <img 
-                src={pack.authorAvatar} 
+              <img
                 alt={pack.metadata.author}
                 className="w-10 h-10 rounded-full"
+                src={pack.authorAvatar}
               />
             )}
             <div>
               <p className="font-semibold">{pack.metadata.author}</p>
-              <p className="text-sm text-default-500">{pack.metadata.license}</p>
+              <p className="text-sm text-default-500">
+                {pack.metadata.license}
+              </p>
             </div>
           </div>
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-4">
             {pack.metadata.tags.map((tag, index) => (
-              <span key={index} className="text-sm bg-default-100 px-3 py-1 rounded">
+              <span
+                key={index}
+                className="text-sm bg-default-100 px-3 py-1 rounded"
+              >
                 {tag}
               </span>
             ))}
@@ -213,10 +268,10 @@ export default function PackDetailPage() {
 
           {/* Voting */}
           <div className="flex items-center gap-4">
-            <Button size="sm" variant="flat" color="success">
+            <Button color="success" size="sm" variant="flat">
               ▲ {pack.upvotes}
             </Button>
-            <Button size="sm" variant="flat" color="danger">
+            <Button color="danger" size="sm" variant="flat">
               ▼ {pack.downvotes}
             </Button>
           </div>
@@ -231,7 +286,10 @@ export default function PackDetailPage() {
             </h2>
             <div className="space-y-4">
               {pack.templates.map((template) => (
-                <div key={template.id} className="border-b pb-4 last:border-b-0">
+                <div
+                  key={template.id}
+                  className="border-b pb-4 last:border-b-0"
+                >
                   <h3 className="font-semibold mb-2">{template.name}</h3>
                   <Code className="text-sm">{template.content}</Code>
                   {template.variables && template.variables.length > 0 && (
@@ -256,29 +314,41 @@ export default function PackDetailPage() {
                   <div className="space-y-2">
                     {pack.brand_kit.colors.primary && (
                       <div className="flex items-center gap-2">
-                        <div 
+                        <div
                           className="w-8 h-8 rounded border"
-                          style={{ backgroundColor: pack.brand_kit.colors.primary }}
+                          style={{
+                            backgroundColor: pack.brand_kit.colors.primary,
+                          }}
                         />
-                        <span className="text-sm">Primary: {pack.brand_kit.colors.primary}</span>
+                        <span className="text-sm">
+                          Primary: {pack.brand_kit.colors.primary}
+                        </span>
                       </div>
                     )}
                     {pack.brand_kit.colors.secondary && (
                       <div className="flex items-center gap-2">
-                        <div 
+                        <div
                           className="w-8 h-8 rounded border"
-                          style={{ backgroundColor: pack.brand_kit.colors.secondary }}
+                          style={{
+                            backgroundColor: pack.brand_kit.colors.secondary,
+                          }}
                         />
-                        <span className="text-sm">Secondary: {pack.brand_kit.colors.secondary}</span>
+                        <span className="text-sm">
+                          Secondary: {pack.brand_kit.colors.secondary}
+                        </span>
                       </div>
                     )}
                     {pack.brand_kit.colors.accent && (
                       <div className="flex items-center gap-2">
-                        <div 
+                        <div
                           className="w-8 h-8 rounded border"
-                          style={{ backgroundColor: pack.brand_kit.colors.accent }}
+                          style={{
+                            backgroundColor: pack.brand_kit.colors.accent,
+                          }}
                         />
-                        <span className="text-sm">Accent: {pack.brand_kit.colors.accent}</span>
+                        <span className="text-sm">
+                          Accent: {pack.brand_kit.colors.accent}
+                        </span>
                       </div>
                     )}
                   </div>
@@ -289,10 +359,14 @@ export default function PackDetailPage() {
                   <h3 className="font-semibold mb-2">Fonts</h3>
                   <div className="space-y-1">
                     {pack.brand_kit.fonts.heading && (
-                      <p className="text-sm">Heading: {pack.brand_kit.fonts.heading}</p>
+                      <p className="text-sm">
+                        Heading: {pack.brand_kit.fonts.heading}
+                      </p>
                     )}
                     {pack.brand_kit.fonts.body && (
-                      <p className="text-sm">Body: {pack.brand_kit.fonts.body}</p>
+                      <p className="text-sm">
+                        Body: {pack.brand_kit.fonts.body}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -308,18 +382,29 @@ export default function PackDetailPage() {
             <div className="space-y-3">
               {pack.assets.length > 0 ? (
                 pack.assets.map((asset) => (
-                  <div key={asset.id} className="flex items-center justify-between border-b pb-3 last:border-b-0">
+                  <div
+                    key={asset.id}
+                    className="flex items-center justify-between border-b pb-3 last:border-b-0"
+                  >
                     <div>
                       <p className="font-semibold">{asset.name}</p>
                       <p className="text-sm text-default-500">{asset.type}</p>
                     </div>
-                    <a href={asset.url} target="_blank" rel="noopener noreferrer">
-                      <Button size="sm" variant="flat">View</Button>
+                    <a
+                      href={asset.url}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <Button size="sm" variant="flat">
+                        View
+                      </Button>
                     </a>
                   </div>
                 ))
               ) : (
-                <p className="text-default-500 text-sm">No assets in this pack</p>
+                <p className="text-default-500 text-sm">
+                  No assets in this pack
+                </p>
               )}
             </div>
           </div>
@@ -331,7 +416,10 @@ export default function PackDetailPage() {
             </h2>
             <div className="space-y-4">
               {pack.versionHistory.map((version, index) => (
-                <div key={index} className="border-l-2 border-primary pl-4 pb-4 last:pb-0">
+                <div
+                  key={index}
+                  className="border-l-2 border-primary pl-4 pb-4 last:pb-0"
+                >
                   <div className="flex items-center justify-between mb-2">
                     <span className="font-semibold">{version.version}</span>
                     <span className="text-xs text-default-500">
@@ -355,13 +443,17 @@ export default function PackDetailPage() {
               <p className="text-sm text-default-500">
                 <Trans t={t}>created-at</Trans>
               </p>
-              <p className="font-semibold">{new Date(pack.metadata.createdAt!).toLocaleString()}</p>
+              <p className="font-semibold">
+                {new Date(pack.metadata.createdAt!).toLocaleString()}
+              </p>
             </div>
             <div>
               <p className="text-sm text-default-500">
                 <Trans t={t}>updated-at</Trans>
               </p>
-              <p className="font-semibold">{new Date(pack.metadata.updatedAt!).toLocaleString()}</p>
+              <p className="font-semibold">
+                {new Date(pack.metadata.updatedAt!).toLocaleString()}
+              </p>
             </div>
           </div>
         </div>
