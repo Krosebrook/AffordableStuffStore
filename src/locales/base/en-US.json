@@ -13,6 +13,7 @@
   "pricing": "Pricing",
   "blog": "Blog",
   "about": "About",
+  "flashfusion": "FlashFusion",
   "profile": "Profile",
   "dashboard": "Dashboard",
   "projects": "Projects",
@@ -34,5 +35,24 @@
   "cookie-policy": "Cookie Policy.",
   "accept-all": "Accept All",
   "reject": "Reject",
-  "cookie-consent-title": "Cookies policy"
+  "cookie-consent-title": "Cookies policy",
+  "FlashFusion Prompt Builder": "FlashFusion Prompt Builder",
+  "Create modular prompts with 30+ presets per section": "Create modular prompts with 30+ presets per section",
+  "Pack Name": "Pack Name",
+  "Enter pack name": "Enter pack name",
+  "Description": "Description",
+  "Enter description": "Enter description",
+  "Category": "Category",
+  "Search presets...": "Search presets...",
+  "Add context for your prompt...": "Add context for your prompt...",
+  "Define the task...": "Define the task...",
+  "Add constraints...": "Add constraints...",
+  "Set the tone...": "Set the tone...",
+  "Estimated Tokens": "Estimated Tokens",
+  "Clear All": "Clear All",
+  "Copy Prompt": "Copy Prompt",
+  "Copied!": "Copied!",
+  "Export .ffpack.json": "Export .ffpack.json",
+  "Preview": "Preview"
 }
+

@@ -38,6 +38,13 @@ jobs:
         run: |
           npx vite build --base=/${{ github.event.repository.name }}
 
+      - name: Run Lighthouse CI
+        run: |
+          npm install -g @lhci/cli@0.13.x
+          lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

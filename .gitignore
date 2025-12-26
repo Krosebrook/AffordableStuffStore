@@ -7,10 +7,28 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
 dist
 dist-ssr
 *.local
+.next
+.turbo
+
+# Testing
+coverage
+.nyc_output
+test-results
+playwright-report
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+build
+out
 
 # Editor directories and files
 !.vscode/extensions.json
@@ -22,36 +40,19 @@ dist-ssr
 *.sln
 *.sw?
 
-
+# Lock files
 pnpm-lock.yaml
 yarn.lock
 bun.lockb
+
+# Copilot
 .github/copilot-instructions.md
 
-# Environment variables and secrets
-.env
-.env.local
-.env.*.local
-*.key
-*.pem
-secrets.json
+# Old Vite files (deprecated)
+index.html
+vite.config.ts
+tsconfig.node.json
+postcss.config.js
+eslint.config.ts
+update-heroui.ts
 
-# Test coverage
-coverage/
-.nyc_output/
-
-# E2E test results
-playwright-report/
-test-results/
-
-# Lighthouse CI
-.lighthouseci/
-
-# Security scan results
-.snyk
-vulnerability-report.json
-
-# Temporary files
-tmp/
-temp/
-*.tmp
