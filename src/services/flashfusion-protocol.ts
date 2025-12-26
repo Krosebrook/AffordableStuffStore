@@ -212,9 +212,11 @@ class FlashFusionProtocolService {
     // In a real application, this would collect actual performance metrics
     // For now, we'll simulate some data
     if (typeof performance !== "undefined") {
-      const navigation = performance.getEntriesByType(
-        "navigation",
-      )[0] as PerformanceNavigationTiming;
+      const navigationEntries = performance.getEntriesByType("navigation");
+      const navigation =
+        navigationEntries.length > 0
+          ? (navigationEntries[0] as PerformanceNavigationTiming)
+          : null;
 
       return {
         rlsLatency: Math.random() * 150, // Simulated RLS latency

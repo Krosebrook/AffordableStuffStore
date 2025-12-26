@@ -6,6 +6,10 @@ import { useEffect } from "react";
 
 import { flashFusionProtocol } from "@/services/flashfusion-protocol";
 
+// Constants
+const MILLISECONDS_PER_HOUR = 3600000;
+const MILLISECONDS_PER_DAY = 86400000;
+
 export const useInitializeSampleData = () => {
   useEffect(() => {
     // Check if data already exists
@@ -62,7 +66,7 @@ export const useInitializeSampleData = () => {
         channelName: "Shopify API",
         status: "degraded",
         uptime: 98.2,
-        lastFailure: new Date(Date.now() - 3600000 * 12), // 12 hours ago
+        lastFailure: new Date(Date.now() - MILLISECONDS_PER_HOUR * 12), // 12 hours ago
         failureCount: 7,
         responseTime: 850,
         errorRate: 1.8,
@@ -94,7 +98,7 @@ export const useInitializeSampleData = () => {
           "Current version has known performance issues with nested routes",
         severity: "medium",
         category: "maintainability",
-        dateIdentified: new Date(Date.now() - 86400000 * 14), // 14 days ago
+        dateIdentified: new Date(Date.now() - MILLISECONDS_PER_DAY * 14), // 14 days ago
         estimatedEffort: 8,
         status: "planned",
       });
@@ -106,7 +110,7 @@ export const useInitializeSampleData = () => {
           "No rate limiting currently in place, exposing system to potential abuse",
         severity: "high",
         category: "security",
-        dateIdentified: new Date(Date.now() - 86400000 * 7), // 7 days ago
+        dateIdentified: new Date(Date.now() - MILLISECONDS_PER_DAY * 7), // 7 days ago
         estimatedEffort: 16,
         status: "in-progress",
       });
@@ -118,7 +122,7 @@ export const useInitializeSampleData = () => {
           "Current queries are causing slow response times on large datasets",
         severity: "high",
         category: "performance",
-        dateIdentified: new Date(Date.now() - 86400000 * 21), // 21 days ago
+        dateIdentified: new Date(Date.now() - MILLISECONDS_PER_DAY * 21), // 21 days ago
         estimatedEffort: 24,
         status: "identified",
       });
@@ -131,7 +135,7 @@ export const useInitializeSampleData = () => {
           "Users experiencing intermittent failures when syncing products",
         severity: "medium",
         status: "investigating",
-        startTime: new Date(Date.now() - 3600000 * 8), // 8 hours ago
+        startTime: new Date(Date.now() - MILLISECONDS_PER_HOUR * 8), // 8 hours ago
         affectedSystems: ["Shopify API", "Product Sync Service"],
       });
 
@@ -144,7 +148,7 @@ export const useInitializeSampleData = () => {
           "No documentation on preferred database access methods (API vs MCP)",
         priority: "high",
         status: "identified",
-        dateIdentified: new Date(Date.now() - 86400000 * 5), // 5 days ago
+        dateIdentified: new Date(Date.now() - MILLISECONDS_PER_DAY * 5), // 5 days ago
       });
 
       flashFusionProtocol.addDocumentationGap({
@@ -155,7 +159,7 @@ export const useInitializeSampleData = () => {
           "Missing documentation on how to access real-time system metrics",
         priority: "medium",
         status: "identified",
-        dateIdentified: new Date(Date.now() - 86400000 * 3), // 3 days ago
+        dateIdentified: new Date(Date.now() - MILLISECONDS_PER_DAY * 3), // 3 days ago
       });
 
       flashFusionProtocol.addDocumentationGap({
@@ -167,7 +171,7 @@ export const useInitializeSampleData = () => {
         priority: "high",
         status: "in-progress",
         assignee: "DevOps Team",
-        dateIdentified: new Date(Date.now() - 86400000 * 10), // 10 days ago
+        dateIdentified: new Date(Date.now() - MILLISECONDS_PER_DAY * 10), // 10 days ago
       });
 
       // Track some creator behavior
