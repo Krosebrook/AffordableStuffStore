@@ -78,7 +78,7 @@ The FlashFusion database consists of the following tables:
 
 All tables have RLS enabled with the following policy pattern:
 
-- **SELECT**: `WHERE org_id IN (SELECT id FROM orgs WHERE owner_id = auth.uid()) OR is_public = true`
+- **SELECT**: `USING (org_id IN (SELECT id FROM orgs WHERE owner_id = auth.uid()) OR is_public = true)`
 - **INSERT**: `WITH CHECK (org_id IN (SELECT id FROM orgs WHERE owner_id = auth.uid()))`
 - **UPDATE**: `USING (org_id IN (SELECT id FROM orgs WHERE owner_id = auth.uid()))`
 - **DELETE**: `USING (org_id IN (SELECT id FROM orgs WHERE owner_id = auth.uid()))`
