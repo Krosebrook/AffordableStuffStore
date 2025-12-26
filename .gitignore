@@ -7,10 +7,28 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
 dist
 dist-ssr
 *.local
+.next
+.turbo
+
+# Testing
+coverage
+.nyc_output
+test-results
+playwright-report
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+build
+out
 
 # Editor directories and files
 !.vscode/extensions.json
@@ -22,16 +40,19 @@ dist-ssr
 *.sln
 *.sw?
 
+# Lock files
 pnpm-lock.yaml
 yarn.lock
 bun.lockb
+
+# Copilot
 .github/copilot-instructions.md
 
-# Pod AI App specific
-pod-ai-app/.env
-pod-ai-app/mobile/.expo
-pod-ai-app/mobile/.expo-shared
-pod-ai-app/backend/dist
-pod-ai-app/backend/node_modules
-pod-ai-app/mobile/node_modules
-*.tsbuildinfo
+# Old Vite files (deprecated)
+index.html
+vite.config.ts
+tsconfig.node.json
+postcss.config.js
+eslint.config.ts
+update-heroui.ts
+
