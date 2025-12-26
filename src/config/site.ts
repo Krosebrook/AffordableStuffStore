@@ -17,6 +17,14 @@ export const siteConfig = () => ({
       href: "/docs",
     },
     {
+      label: i18next.t("marketplace"),
+      href: "/marketplace",
+    },
+    {
+      label: i18next.t("prompt-builder"),
+      href: "/prompt-builder",
+    },
+    {
       label: i18next.t("pricing"),
       href: "/pricing",
     },
