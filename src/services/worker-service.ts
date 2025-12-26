@@ -11,6 +11,8 @@ export class WorkerService {
   private jobs: Map<string, GenerationJob> = new Map();
   private maxRetries = 3;
   private retryDelay = 5000; // 5 seconds
+  private readonly FAILURE_SIMULATION_RATE = 0.1; // 10% failure rate for testing
+  private readonly MAX_SIMULATION_RETRIES = 2; // Fail on first 2 attempts for testing
 
   /**
    * Create a new generation job
@@ -113,7 +115,7 @@ export class WorkerService {
     );
 
     // Simulate random failures for testing retry logic
-    if (Math.random() < 0.1 && job.retryCount < 2) {
+    if (Math.random() < this.FAILURE_SIMULATION_RATE && job.retryCount < this.MAX_SIMULATION_RETRIES) {
       throw new Error("Simulated processing error");
     }
 

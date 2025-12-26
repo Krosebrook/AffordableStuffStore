@@ -93,7 +93,9 @@ export function parseFFPack(json: string): FFPack {
   // Convert date strings back to Date objects
   data.exportedAt = new Date(data.exportedAt);
   data.assets.forEach((asset: any) => {
-    asset.provenance.createdAt = new Date(asset.provenance.createdAt);
+    if (asset.provenance && asset.provenance.createdAt) {
+      asset.provenance.createdAt = new Date(asset.provenance.createdAt);
+    }
   });
 
   return data as FFPack;

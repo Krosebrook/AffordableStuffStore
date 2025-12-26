@@ -14,6 +14,8 @@ import type {
 
 /**
  * Generate a hash for a given prompt
+ * Note: This is a simple hash for demo purposes.
+ * In production, use crypto.subtle.digest('SHA-256', ...) for proper hashing
  */
 function hashPrompt(prompt: string): string {
   // Simple hash implementation - in production use crypto.subtle.digest

@@ -165,6 +165,8 @@ export function validateBrandKit(
   };
 }
 
+const MIN_TONE_WORD_COUNT = 10;
+
 /**
  * Lint brand kit for best practices
  */
@@ -197,7 +199,7 @@ export function lintBrandKit(brandKit: BrandKit): BrandKitValidationError[] {
   }
 
   // Check tone of voice
-  if (!brandKit.tone || brandKit.tone.split(" ").length < 10) {
+  if (!brandKit.tone || brandKit.tone.split(" ").length < MIN_TONE_WORD_COUNT) {
     warnings.push({
       field: "tone",
       message: "Add a more detailed tone of voice description",
