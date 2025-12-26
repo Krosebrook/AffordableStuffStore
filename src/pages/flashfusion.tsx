@@ -177,7 +177,7 @@ export default function FlashFusionPage() {
 
     if (success) {
       setCopySuccess(true);
-      window.setTimeout(() => setCopySuccess(false), 2000);
+      setTimeout(() => setCopySuccess(false), 2000);
     }
   };
 

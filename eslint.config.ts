@@ -27,6 +27,7 @@ export default [
         File: "readonly",
         FileReader: "readonly",
         navigator: "readonly",
+        setTimeout: "readonly",
       },
       parserOptions: {
         ecmaFeatures: {

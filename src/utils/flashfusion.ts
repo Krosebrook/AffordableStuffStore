@@ -11,6 +11,8 @@ export const estimateTokens = (text: string): number => {
   // Remove extra whitespace
   const cleaned = text.trim().replace(/\s+/g, " ");
 
+  if (!cleaned) return 0;
+
   // Approximate: 1 token ≈ 4 characters for English text
   // Adjust for punctuation and special characters
   const charCount = cleaned.length;
@@ -193,5 +195,5 @@ export const formatDate = (date: Date | string): string => {
  * Generate unique ID
  */
 export const generateId = (): string => {
-  return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  return `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 };
