@@ -88,11 +88,19 @@ export interface Asset {
 
 export type AssetType = "text" | "image" | "video" | "audio";
 
+/**
+ * AssetProvenance - Tracks the origin and generation parameters of AI-generated content
+ * This is critical for:
+ * - Audit trails and compliance
+ * - Reproducing generation results
+ * - Dataset attribution and copyright
+ * - Model version tracking
+ */
 export interface AssetProvenance {
-  model: string;
-  prompt_hash: string;
-  dataset_tag?: string;
-  generation_params: Record<string, unknown>;
+  model: string; // AI model used (e.g., "gpt-4", "dall-e-3", "stable-diffusion")
+  prompt_hash: string; // SHA-256 hash of the prompt for integrity verification
+  dataset_tag?: string; // Training dataset identifier (if applicable)
+  generation_params: Record<string, unknown>; // Temperature, top_p, etc.
 }
 
 // Campaign Types

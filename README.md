@@ -55,16 +55,18 @@ FlashFusion empowers creators, agencies, and teams to build AI-powered content w
 
 ## Technologies Used
 
-### Core Stack
-- [Vite 6](https://vitejs.dev) - Build tool (transitioning to Next.js)
+### Core Stack (Current Implementation)
+- [Vite 6](https://vitejs.dev) - Fast build tool with HMR
 - [React 19](https://reactjs.org) - UI library
 - [TypeScript](https://www.typescriptlang.org) - Type safety
 - [Tailwind CSS 4](https://tailwindcss.com) - Utility-first CSS
 - [HeroUI](https://heroui.com) - Component library
 - [Framer Motion](https://www.framer.com/motion) - Animation library
+- [i18next](https://www.i18next.com) - Internationalization
 
-### Future Stack (Planned)
-- [Next.js 15](https://nextjs.org) - React framework with App Router
+### Planned Migration
+The application is currently built with Vite for rapid prototyping. Future versions will migrate to:
+- [Next.js 15](https://nextjs.org) - React framework with App Router for production deployment
 - [Supabase](https://supabase.com) - Auth, Database (Postgres + RLS), Storage
 - [Vercel](https://vercel.com) - Deployment platform with Edge Functions
 - [Turborepo](https://turbo.build/repo) - Monorepo build system
@@ -73,7 +75,6 @@ FlashFusion empowers creators, agencies, and teams to build AI-powered content w
 - [ESLint 9](https://eslint.org) - Linting
 - [Vitest](https://vitest.dev) - Unit testing (planned)
 - [Playwright](https://playwright.dev) - E2E testing (planned)
-- [i18next](https://www.i18next.com) - Internationalization
 
 ## Security
 

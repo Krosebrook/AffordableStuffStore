@@ -68,7 +68,9 @@ export const LIMITS = {
   MAX_TEMPLATES_PER_ORG: 100,
 } as const;
 
-// API Endpoints (placeholder - will be replaced with actual Edge Functions)
+// API Endpoints
+// Note: These will be implemented as Vercel Edge Functions in production.
+// Currently defined as placeholders for client-side routing and type safety.
 export const API_ENDPOINTS = {
   CONTENT_GENERATE: "/api/content/generate",
   CAMPAIGNS_DRAFT: "/api/campaigns/draft",

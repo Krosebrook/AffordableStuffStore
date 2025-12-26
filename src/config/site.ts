@@ -5,7 +5,7 @@ export const siteConfig = () => ({
   needCookieConsent: true,
   name: "FlashFusion",
   description:
-    "AI-Powered Creative Mega App - Production-grade SaaS platform for content generation and campaign management",
+    "AI-powered SaaS for content generation, campaign management, and multi-channel publishing",
   navItems: [
     {
       label: "Home",
