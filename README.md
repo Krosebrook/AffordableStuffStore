@@ -1,21 +1,173 @@
-# Vite & HeroUI Template
+# AffordableStuffStore
 
-This is a template for creating applications using Vite 6 and HeroUI (v2).
+A modern, high-performance e-commerce application built with Vite, React, and HeroUI.
 
-[Try it on CodeSandbox](https://githubbox.com/sctg-development/vite-react-heroui-template)
+## ⚡ Quick Start
 
-## Star the project
+### Prerequisites
 
-**If you appreciate my work, please consider giving it a star! 🤩**
+- Node.js 18+ 
+- npm 9+ (or yarn/pnpm)
+- Git
 
-## On Github Pages ?
+### Installation
 
-Ths plugin uses our [@sctg/vite-plugin-github-pages-spa](https://github.com/sctg-development/vite-plugin-github-pages-spa) Vite 6 plugin for handling the Github Pages limitations with SPA.  
+1. **Clone the repository**
 
-## With OAuth2 authentication ?
+```bash
+git clone https://github.com/Krosebrook/AffordableStuffStore.git
+cd AffordableStuffStore
+```
 
-If you are looking for a template with OAuth2 authentication, you can check out my other repository: [vite-react-heroui-auth0-template](https://github.com/sctg-development/vite-react-heroui-auth0-template)
-which is the same template with an OAuth2 authentication layer implemented via a free tier on [Auth0](https://auth0.com).
+2. **Install dependencies**
+
+```bash
+npm install
+```
+
+3. **Set up environment variables**
+
+```bash
+# Copy the example environment file
+cp .env.example .env
+
+# Edit .env and configure your environment variables
+```
+
+4. **Start the development server**
+
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:5173`
+
+## 📚 Documentation
+
+Comprehensive documentation is available in the `/docs` directory:
+
+- **[Architecture](./docs/architecture.md)** - System design, components, and data flow
+- **[Brand Rules](./docs/brand_rules.md)** - Design guidelines, colors, and typography
+- **[Performance](./docs/performance.md)** - Performance budgets and baselines
+- **[Security](./docs/security.md)** - Security measures (RLS, CSP, secrets)
+- **[Verification](./docs/verification.md)** - Testing and acceptance criteria
+- **[ADR Template](./docs/ADR-TEMPLATE.md)** - Architecture Decision Records template
+
+### Architecture Decision Records
+
+- [ADR-0001: Use Vite as Build Tool](./docs/adr-0001-use-vite.md)
+
+## 🎨 Based on Vite & HeroUI Template
+
+This project is built upon the excellent Vite & HeroUI template.
+
+[Try the original template on CodeSandbox](https://githubbox.com/sctg-development/vite-react-heroui-template)
+
+## 🚀 Deployment
+
+### Deploying to Vercel (Recommended)
+
+1. **Install Vercel CLI**
+
+```bash
+npm install -g vercel
+```
+
+2. **Login to Vercel**
+
+```bash
+vercel login
+```
+
+3. **Deploy to preview**
+
+```bash
+vercel
+```
+
+4. **Deploy to production**
+
+```bash
+vercel --prod
+```
+
+### Deploying via GitHub Integration
+
+1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
+2. Click "New Project"
+3. Import your GitHub repository
+4. Configure environment variables in Vercel dashboard (use `.env.example` as reference)
+5. Click "Deploy"
+
+### Environment Variables for Production
+
+Ensure these environment variables are set in your Vercel project settings:
+
+```bash
+VITE_APP_NAME=AffordableStuffStore
+VITE_API_URL=https://api.yourproductiondomain.com
+# Add other production variables as needed
+```
+
+### Deploying to GitHub Pages
+
+This project includes the [@sctg/vite-plugin-github-pages-spa](https://github.com/sctg-development/vite-plugin-github-pages-spa) plugin for GitHub Pages deployment.
+
+1. **Update `vite.config.ts` base URL**
+
+```typescript
+export default defineConfig({
+  base: '/AffordableStuffStore/', // Your repository name
+  // ... other config
+});
+```
+
+2. **Build and deploy**
+
+```bash
+npm run build
+# Deploy the dist folder to GitHub Pages
+```
+
+### Other Hosting Platforms
+
+The application can be deployed to any static hosting service:
+
+- **Netlify**: Connect your GitHub repo and deploy
+- **Cloudflare Pages**: Import project from GitHub
+- **AWS S3 + CloudFront**: Upload build output
+- **Azure Static Web Apps**: Connect GitHub repo
+
+Build command: `npm run build`  
+Output directory: `dist`
+
+## 📦 Available Scripts
+
+```bash
+# Development
+npm run dev              # Start development server
+
+# Building
+npm run build           # Build for production (TypeScript + Vite)
+npm run preview         # Preview production build locally
+
+# Code Quality
+npm run lint            # Run ESLint on source files
+
+# HeroUI Updates
+npm run update:heroui:cli   # Update HeroUI packages via CLI
+npm run update:heroui       # Update HeroUI packages via script
+```
+
+## 🧪 Testing
+
+*Testing infrastructure to be implemented*
+
+```bash
+# npm run test          # Run unit tests
+# npm run test:e2e      # Run end-to-end tests
+# npm run test:coverage # Generate coverage report
+```
 
 ## Technologies Used
 
