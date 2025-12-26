@@ -1,63 +1,62 @@
 import { Link } from "@heroui/link";
-import { Snippet } from "@heroui/snippet";
-import { Code } from "@heroui/code";
 import { button as buttonStyles } from "@heroui/theme";
-import { Trans, useTranslation } from "react-i18next";
 
-import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
 import DefaultLayout from "@/layouts/default";
 
 export default function IndexPage() {
-  const { t } = useTranslation();
-
   return (
     <DefaultLayout>
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        <div className="inline-block max-w-lg text-center justify-center">
-          <span className={title()}>{t("make")}&nbsp;</span>
-          <span className={title({ color: "violet" })}>
-            {t("beautiful")}&nbsp;
-          </span>
+        <div className="inline-block max-w-4xl text-center justify-center">
+          <span className={title()}>FlashFusion&nbsp;</span>
           <br />
-          <span className={title()}>
-            <Trans i18nKey="websites-regardless-of-your-design-experience" />
+          <span className={title({ color: "violet" })}>
+            AI-Powered Creative Mega App
           </span>
           <div className={subtitle({ class: "mt-4" })}>
-            <Trans i18nKey="beautiful-fast-and-modern-react-ui-library" />
+            Production-grade SaaS platform for AI content generation, campaign management, and multi-channel publishing.
           </div>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-3 mt-6">
           <Link
-            isExternal
             className={buttonStyles({
               color: "primary",
               radius: "full",
               variant: "shadow",
             })}
-            href={siteConfig().links.docs}
+            href="/prompt-builder"
           >
-            <Trans i18nKey="documentation" />
+            Start Creating
           </Link>
           <Link
-            isExternal
             className={buttonStyles({ variant: "bordered", radius: "full" })}
-            href={siteConfig().links.github}
+            href="/marketplace"
           >
-            <GithubIcon size={20} />
-            GitHub
+            Explore Marketplace
           </Link>
         </div>
 
-        <div className="mt-8">
-          <Snippet hideCopyButton hideSymbol variant="bordered">
-            <span>
-              <Trans i18nKey="get-started-by-editing" />{" "}
-              <Code color="primary">pages/index.tsx</Code>
-            </span>
-          </Snippet>
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl">
+          <div className="p-6 rounded-lg bg-default-100">
+            <h3 className="text-xl font-bold mb-2">Modular Prompt Builder</h3>
+            <p className="text-default-600">
+              30+ presets, searchable combobox, live token estimates
+            </p>
+          </div>
+          <div className="p-6 rounded-lg bg-default-100">
+            <h3 className="text-xl font-bold mb-2">Content Studio</h3>
+            <p className="text-default-600">
+              Generate text, images, video, and music with brand validation
+            </p>
+          </div>
+          <div className="p-6 rounded-lg bg-default-100">
+            <h3 className="text-xl font-bold mb-2">Campaign Wizard</h3>
+            <p className="text-default-600">
+              Multi-channel scheduling with smart retry logic
+            </p>
+          </div>
         </div>
       </section>
     </DefaultLayout>

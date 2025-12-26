@@ -9,6 +9,11 @@ import DocsPage from "@/pages/docs";
 import PricingPage from "@/pages/pricing";
 import BlogPage from "@/pages/blog";
 import AboutPage from "@/pages/about";
+import PromptBuilderPage from "@/pages/prompt-builder";
+import ContentStudioPage from "@/pages/content-studio";
+import CampaignsPage from "@/pages/campaigns";
+import MarketplacePage from "@/pages/marketplace";
+import PromptsPage from "@/pages/prompts";
 
 function App() {
   return (
@@ -16,6 +21,11 @@ function App() {
       <CookieConsent />
       <Routes>
         <Route element={<IndexPage />} path="/" />
+        <Route element={<PromptBuilderPage />} path="/prompt-builder" />
+        <Route element={<ContentStudioPage />} path="/content-studio" />
+        <Route element={<CampaignsPage />} path="/campaigns" />
+        <Route element={<MarketplacePage />} path="/marketplace" />
+        <Route element={<PromptsPage />} path="/prompts" />
         <Route element={<DocsPage />} path="/docs" />
         <Route element={<PricingPage />} path="/pricing" />
         <Route element={<BlogPage />} path="/blog" />

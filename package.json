@@ -1,7 +1,8 @@
 {
-  "name": "vite-template",
+  "name": "flashfusion",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "AI-Powered Creative Mega App - Production-grade SaaS platform for content generation and campaign management",
   "type": "module",
   "scripts": {
     "dev": "vite",
