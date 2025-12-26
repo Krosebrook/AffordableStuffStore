@@ -41,15 +41,15 @@ A feature is considered "done" when:
 
 #### Performance
 
-- ❌ **Lighthouse Performance score < 80**
-- ❌ **LCP > 4.0 seconds**
-- ❌ **CLS > 0.25**
-- ❌ **Total bundle size > 500 KB (initial)**
+- ❌ **Lighthouse Performance score < 80** (Target: 90+, see performance.md)
+- ❌ **LCP > 4.0 seconds** (Target: 2.5s, see performance.md)
+- ❌ **CLS > 0.25** (Target: 0.1, see performance.md)
+- ❌ **Total bundle size > 500 KB (initial)** (Target: 300 KB, see performance.md)
 - ❌ **Page load time > 5 seconds on 4G**
 
 #### Accessibility
 
-- ❌ **Lighthouse Accessibility score < 95**
+- ❌ **Lighthouse Accessibility score < 95** (Target: 100, see performance.md)
 - ❌ **Keyboard navigation broken**
 - ❌ **Color contrast fails WCAG AA**
 - ❌ **Screen reader incompatibility**

@@ -312,7 +312,7 @@ npm audit fix
 
 ### Contact Information
 
-- Security Email: security@affordablestuffstore.com (TBD)
+- Security Email: TBD (to be configured)
 - Response Time: < 24 hours for critical issues
 
 ## Security Testing
