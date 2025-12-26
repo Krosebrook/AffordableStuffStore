@@ -1,185 +1,181 @@
-# AffordableStuffStore
+# FlashFusion Core Architecture
 
-A modern, high-performance e-commerce application built with Vite, React, and HeroUI.
+> **⚠️ Architecture Transformation**: This repository has been migrated from a Vite + React template to the **FlashFusion Core Architecture** - a production-ready, enterprise-grade application framework.
 
-## ⚡ Quick Start
+## 🎯 What is FlashFusion?
 
-### Prerequisites
+FlashFusion is a modern, full-stack application architecture that combines the best tools and practices for building scalable, secure, and observable applications.
 
-- Node.js 18+ 
-- npm 9+ (or yarn/pnpm)
-- Git
+### Key Features
 
-### Installation
+- ⚡ **Next.js 15** with App Router and React Server Components
+- 🎨 **Tailwind CSS v4** with custom FlashFusion brand colors
+- 🧩 **shadcn/ui** component library for consistent UI
+- 📦 **Turborepo + PNPM** monorepo for efficient builds
+- 🔐 **Supabase** for authentication, database, and storage
+- 👷 **Worker Services** for background processing
+- 📊 **Full Observability** with Sentry, PostHog, and OpenTelemetry
+- 🧪 **Complete Testing** with Vitest and Playwright
+- 🛡️ **Enterprise Security** with RLS, CSP, and CSRF protection
 
-1. **Clone the repository**
+## 📖 Documentation
 
-```bash
-git clone https://github.com/Krosebrook/AffordableStuffStore.git
-cd AffordableStuffStore
-```
+For complete documentation, see **[FLASHFUSION.md](./FLASHFUSION.md)**
 
-2. **Install dependencies**
-
-```bash
-npm install
-```
-
-3. **Set up environment variables**
+## 🚀 Quick Start
 
 ```bash
-# Copy the example environment file
-cp .env.example .env
+# Install dependencies
+pnpm install
 
-# Edit .env and configure your environment variables
+# Start development
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Run tests
+pnpm test
+pnpm test:e2e
 ```
 
-4. **Start the development server**
+## 🏗️ Architecture Overview
 
-```bash
-npm run dev
+```
+flashfusion/
+├── apps/
+│   ├── web/              # Next.js application
+│   └── workers/          # Background workers
+│       ├── render/       # Render processing
+│       ├── schedule/     # Task scheduling
+│       └── insights/     # Analytics
+├── packages/
+│   ├── ui/               # Shared UI components
+│   ├── config/           # Shared configurations
+│   └── shared/           # Utilities
+└── supabase/
+    └── migrations/       # Database schema
 ```
 
-The application will be available at `http://localhost:5173`
+## 🎨 Brand Colors
 
-## 📚 Documentation
+FlashFusion uses a vibrant, modern color palette:
 
-Comprehensive documentation is available in the `/docs` directory:
+- **Primary**: `#FF7B00` - Energetic orange
+- **Secondary**: `#00B4D8` - Fresh blue
+- **Accent**: `#E91E63` - Bold pink
 
-- **[Architecture](./docs/architecture.md)** - System design, components, and data flow
-- **[Brand Rules](./docs/brand_rules.md)** - Design guidelines, colors, and typography
-- **[Performance](./docs/performance.md)** - Performance budgets and baselines
-- **[Security](./docs/security.md)** - Security measures (RLS, CSP, secrets)
-- **[Verification](./docs/verification.md)** - Testing and acceptance criteria
-- **[ADR Template](./docs/ADR-TEMPLATE.md)** - Architecture Decision Records template
-
-### Architecture Decision Records
-
-- [ADR-0001: Use Vite as Build Tool](./docs/adr-0001-use-vite.md)
-
-## 🎨 Based on Vite & HeroUI Template
-
-This project is built upon the excellent Vite & HeroUI template.
-
-[Try the original template on CodeSandbox](https://githubbox.com/sctg-development/vite-react-heroui-template)
-
-## 🚀 Deployment
-
-### Deploying to Vercel (Recommended)
-
-1. **Install Vercel CLI**
-
-```bash
-npm install -g vercel
+Access these in your code via CSS variables:
+```css
+color: var(--color-ff-primary);
+color: var(--color-ff-secondary);
+color: var(--color-ff-accent);
 ```
 
-2. **Login to Vercel**
+## 🔐 Security First
 
-```bash
-vercel login
-```
+FlashFusion is built with security as a priority:
 
-3. **Deploy to preview**
+- ✅ Row Level Security (RLS) policies on all tables
+- ✅ Content Security Policy (CSP) headers
+- ✅ CSRF token protection
+- ✅ Secure environment variable management
+- ✅ Regular secrets rotation support
 
-```bash
-vercel
-```
+## 📊 Built-in Observability
 
-4. **Deploy to production**
+Monitor your application with confidence:
 
-```bash
-vercel --prod
-```
+- **Sentry**: Error tracking and performance monitoring
+- **PostHog**: Product analytics and feature flags
+- **OpenTelemetry**: Distributed tracing
 
-### Deploying via GitHub Integration
+## 🧪 Testing Strategy
 
-1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
-2. Click "New Project"
-3. Import your GitHub repository
-4. Configure environment variables in Vercel dashboard (use `.env.example` as reference)
-5. Click "Deploy"
+Comprehensive testing setup:
 
-### Environment Variables for Production
+- **Vitest**: Fast unit and integration tests
+- **Playwright**: Reliable end-to-end testing
+- **Coverage**: Track test coverage automatically
 
-Ensure these environment variables are set in your Vercel project settings:
+## 🚢 Deployment
 
-```bash
-VITE_APP_NAME=AffordableStuffStore
-VITE_API_URL=https://api.yourproductiondomain.com
-# Add other production variables as needed
-```
+Optimized for Vercel Edge deployment:
 
-### Deploying to GitHub Pages
+1. Connect repository to Vercel
+2. Configure environment variables
+3. Deploy automatically on push
 
-This project includes the [@sctg/vite-plugin-github-pages-spa](https://github.com/sctg-development/vite-plugin-github-pages-spa) plugin for GitHub Pages deployment.
+Workers can be deployed separately to any Node.js hosting platform.
 
-1. **Update `vite.config.ts` base URL**
+## 📚 Technologies
 
-```typescript
-export default defineConfig({
-  base: '/AffordableStuffStore/', // Your repository name
-  // ... other config
-});
-```
+### Frontend
+- Next.js 15
+- React 19
+- Tailwind CSS v4
+- shadcn/ui
+- Framer Motion
 
-2. **Build and deploy**
+### Backend
+- Supabase (PostgreSQL)
+- Row Level Security
+- Real-time subscriptions
+- Storage
 
-```bash
-npm run build
-# Deploy the dist folder to GitHub Pages
-```
+### Infrastructure
+- Turborepo
+- PNPM workspaces
+- Vercel Edge Runtime
 
-### Other Hosting Platforms
+### Observability
+- Sentry
+- PostHog
+- OpenTelemetry
 
-The application can be deployed to any static hosting service:
+### Testing
+- Vitest
+- Playwright
+- React Testing Library
 
-- **Netlify**: Connect your GitHub repo and deploy
-- **Cloudflare Pages**: Import project from GitHub
-- **AWS S3 + CloudFront**: Upload build output
-- **Azure Static Web Apps**: Connect GitHub repo
+## 🤝 Contributing
 
-Build command: `npm run build`  
-Output directory: `dist`
+We welcome contributions! Please see our contributing guidelines in [FLASHFUSION.md](./FLASHFUSION.md).
 
-## 📦 Available Scripts
+## 📝 License
 
-```bash
-# Development
-npm run dev              # Start development server
+MIT License - see LICENSE file for details
 
-# Building
-npm run build           # Build for production (TypeScript + Vite)
-npm run preview         # Preview production build locally
+---
 
-# Code Quality
-npm run lint            # Run ESLint on source files
+## Migration Notes
 
-# HeroUI Updates
-npm run update:heroui:cli   # Update HeroUI packages via CLI
-npm run update:heroui       # Update HeroUI packages via script
-```
+### What Changed?
 
-## 🧪 Testing
+This repository was previously a Vite + React template. It has been transformed into the FlashFusion Core Architecture with:
 
-*Testing infrastructure to be implemented*
+- ✅ Monorepo structure with Turborepo
+- ✅ Next.js 15 replacing Vite
+- ✅ shadcn/ui replacing HeroUI
+- ✅ Supabase backend integration
+- ✅ Worker services for background tasks
+- ✅ Full observability stack
+- ✅ Comprehensive testing setup
+- ✅ Enterprise security features
 
-```bash
-# npm run test          # Run unit tests
-# npm run test:e2e      # Run end-to-end tests
-# npm run test:coverage # Generate coverage report
-```
+### Old Files
 
-## Technologies Used
+Some old configuration files are now deprecated:
+- `index.html` (Next.js handles this)
+- `vite.config.ts` (Using Next.js config)
+- HeroUI components (Replaced with shadcn/ui)
 
-- [Vite 6](https://vitejs.dev/guide/)
-- [HeroUI](https://heroui.com)
-- [Tailwind CSS 4](https://tailwindcss.com)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [React 19](https://reactjs.org)
-- [i18next](https://www.i18next.com)
-- [ESLint 9](https://eslint.org)
-- [TypeScript](https://www.typescriptlang.org)
-- [Framer Motion](https://www.framer.com/motion)
+These are ignored in `.gitignore` but remain for reference.
+
+---
+
+**Built with ❤️ using the FlashFusion Core Architecture**
+
 
 ## Adding a New Page
 

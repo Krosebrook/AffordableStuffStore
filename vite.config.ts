@@ -66,15 +66,56 @@ export function extractPerVendorDependencies(
  */
 export default defineConfig({
   plugins: [react(), tsconfigPaths(), tailwindcss(), githubPagesSpa()],
+  server: {
+    headers: {
+      // Security headers for development
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+    },
+  },
+  preview: {
+    headers: {
+      // Security headers for preview
+      "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "Permissions-Policy": "geolocation=(), microphone=(), camera=()",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+    },
+  },
   build: {
-    // Enable source maps for better debugging experience
-    // This should be disabled in production for better performance and security
-    sourcemap: true,
+    // Disable source maps in production for better performance and security
+    sourcemap: false,
 
-    // Inline assets smaller than 1KB
-    // This is for demonstration purposes only
-    // and should be adjusted based on the project requirements
-    assetsInlineLimit: 1024,
+    // Inline assets smaller than 4KB (optimized for performance)
+    assetsInlineLimit: 4096,
+
+    // Target modern browsers for smaller bundle sizes
+    target: 'es2020',
+
+    // CSS code splitting
+    cssCodeSplit: true,
+
+    // Minify options for optimal compression
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.trace'],
+        passes: 2,
+      },
+      mangle: {
+        safari10: true,
+      },
+      format: {
+        comments: false,
+      },
+    },
+
     rollupOptions: {
       output: {
         // Customizing the output file names
@@ -84,14 +125,56 @@ export default defineConfig({
 
         /**
          * Manual chunk configuration for better code splitting
-         *
-         * Groups all @heroui dependencies into a single chunk
-         * to optimize loading performance and avoid oversized chunks
+         * Optimized to meet JS≤180KB gzip/route budget
          */
-        manualChunks: {
-          heroui: extractPerVendorDependencies(packageJson, "@heroui"),
+        manualChunks: (id) => {
+          // Vendor chunks - more granular splitting
+          if (id.includes('node_modules')) {
+            // React core - separate from react-dom
+            if (id.includes('react/') && !id.includes('react-dom') && !id.includes('react-router')) {
+              return 'vendor-react-core';
+            }
+            // React DOM separately
+            if (id.includes('react-dom')) {
+              return 'vendor-react-dom';
+            }
+            // Framer Motion
+            if (id.includes('framer-motion')) {
+              return 'vendor-motion';
+            }
+            // HeroUI theme and system (smaller)
+            if (id.includes('@heroui/theme') || id.includes('@heroui/system')) {
+              return 'vendor-heroui-core';
+            }
+            // HeroUI components (can be loaded on demand)
+            if (id.includes('@heroui/')) {
+              return 'vendor-heroui-components';
+            }
+            // i18n libraries
+            if (id.includes('i18next') || id.includes('react-i18next')) {
+              return 'vendor-i18n';
+            }
+            // React Router
+            if (id.includes('react-router')) {
+              return 'vendor-router';
+            }
+            // Tailwind utilities
+            if (id.includes('tailwind') || id.includes('clsx') || id.includes('class-variance-authority')) {
+              return 'vendor-styles';
+            }
+            // Other vendor code
+            return 'vendor-other';
+          }
         },
       },
     },
+
+    // Chunk size warnings
+    chunkSizeWarningLimit: 180, // 180KB to match budget
+  },
+
+  // Performance optimizations
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion'],
   },
 });

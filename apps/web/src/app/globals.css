@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ff-primary: #FF7B00;
+  --color-ff-secondary: #00B4D8;
+  --color-ff-accent: #E91E63;
+  
+  --font-sans: system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
