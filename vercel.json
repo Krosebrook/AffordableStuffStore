@@ -1,12 +1,10 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
-  ],
+  "buildCommand": "cd ../.. && turbo run build --filter=@flashfusion/web",
+  "outputDirectory": "apps/web/.next",
+  "framework": "nextjs",
+  "regions": ["iad1"],
   "functions": {
-    "api/**/*.ts": {
-      "runtime": "edge"
-    },
-    "api/**/*.js": {
+    "apps/web/src/app/**/*.tsx": {
       "runtime": "edge"
     }
   },
