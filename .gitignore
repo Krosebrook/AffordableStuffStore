@@ -27,3 +27,31 @@ pnpm-lock.yaml
 yarn.lock
 bun.lockb
 .github/copilot-instructions.md
+
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+secrets.json
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# E2E test results
+playwright-report/
+test-results/
+
+# Lighthouse CI
+.lighthouseci/
+
+# Security scan results
+.snyk
+vulnerability-report.json
+
+# Temporary files
+tmp/
+temp/
+*.tmp
