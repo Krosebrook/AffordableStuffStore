@@ -1,11 +1,11 @@
 // FlashFusion types and interfaces
 
-export type PromptCategory = 
-  | "automation" 
-  | "creative" 
-  | "ops" 
-  | "llm" 
-  | "notion" 
+export type PromptCategory =
+  | "automation"
+  | "creative"
+  | "ops"
+  | "llm"
+  | "notion"
   | "workflow";
 
 export type PromptSection = "context" | "task" | "constraints" | "tone";

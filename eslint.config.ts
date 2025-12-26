@@ -23,6 +23,10 @@ export default [
         window: "readonly",
         SVGSVGElement: "readonly",
         URL: "readonly",
+        Blob: "readonly",
+        File: "readonly",
+        FileReader: "readonly",
+        navigator: "readonly",
       },
       parserOptions: {
         ecmaFeatures: {

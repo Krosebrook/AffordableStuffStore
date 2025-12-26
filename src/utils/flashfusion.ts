@@ -7,19 +7,19 @@ import { FlashFusionPack } from "@/types/flashfusion";
  */
 export const estimateTokens = (text: string): number => {
   if (!text) return 0;
-  
+
   // Remove extra whitespace
-  const cleaned = text.trim().replace(/\s+/g, ' ');
-  
+  const cleaned = text.trim().replace(/\s+/g, " ");
+
   // Approximate: 1 token ≈ 4 characters for English text
   // Adjust for punctuation and special characters
   const charCount = cleaned.length;
   const wordCount = cleaned.split(/\s+/).length;
-  
+
   // Use a weighted average: character-based estimate and word-based estimate
   const charEstimate = charCount / 4;
   const wordEstimate = wordCount * 1.3; // Average word is ~1.3 tokens
-  
+
   return Math.ceil((charEstimate + wordEstimate) / 2);
 };
 
@@ -45,12 +45,13 @@ export const calculateTotalTokens = (sections: {
  */
 export const exportFlashFusionPack = (pack: FlashFusionPack): void => {
   const jsonString = JSON.stringify(pack, null, 2);
-  const blob = new Blob([jsonString], { type: 'application/json' });
+  const blob = new Blob([jsonString], { type: "application/json" });
   const url = URL.createObjectURL(blob);
-  
-  const link = document.createElement('a');
+
+  const link = document.createElement("a");
+
   link.href = url;
-  link.download = `${pack.name.replace(/\s+/g, '-').toLowerCase()}.ffpack.json`;
+  link.download = `${pack.name.replace(/\s+/g, "-").toLowerCase()}.ffpack.json`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -63,28 +64,29 @@ export const exportFlashFusionPack = (pack: FlashFusionPack): void => {
 export const importFlashFusionPack = (file: File): Promise<FlashFusionPack> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    
+
     reader.onload = (e) => {
       try {
         const content = e.target?.result as string;
         const pack = JSON.parse(content) as FlashFusionPack;
-        
+
         // Validate the pack structure
         if (!pack.version || !pack.name || !pack.sections) {
-          reject(new Error('Invalid FlashFusion Pack format'));
+          reject(new Error("Invalid FlashFusion Pack format"));
+
           return;
         }
-        
+
         resolve(pack);
-      } catch (error) {
-        reject(new Error('Failed to parse FlashFusion Pack file'));
+      } catch {
+        reject(new Error("Failed to parse FlashFusion Pack file"));
       }
     };
-    
+
     reader.onerror = () => {
-      reject(new Error('Failed to read file'));
+      reject(new Error("Failed to read file"));
     };
-    
+
     reader.readAsText(file);
   });
 };
@@ -99,24 +101,24 @@ export const generatePromptText = (sections: {
   tone: string;
 }): string => {
   const parts = [];
-  
+
   if (sections.context) {
     parts.push(`**Context:**\n${sections.context}`);
   }
-  
+
   if (sections.task) {
     parts.push(`**Task:**\n${sections.task}`);
   }
-  
+
   if (sections.constraints) {
     parts.push(`**Constraints:**\n${sections.constraints}`);
   }
-  
+
   if (sections.tone) {
     parts.push(`**Tone:**\n${sections.tone}`);
   }
-  
-  return parts.join('\n\n');
+
+  return parts.join("\n\n");
 };
 
 /**
@@ -125,22 +127,26 @@ export const generatePromptText = (sections: {
 export const copyToClipboard = async (text: string): Promise<boolean> => {
   try {
     await navigator.clipboard.writeText(text);
+
     return true;
-  } catch (error) {
+  } catch {
     // Fallback for older browsers
-    const textArea = document.createElement('textarea');
+    const textArea = document.createElement("textarea");
+
     textArea.value = text;
-    textArea.style.position = 'fixed';
-    textArea.style.left = '-999999px';
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
     document.body.appendChild(textArea);
     textArea.select();
-    
+
     try {
-      document.execCommand('copy');
+      document.execCommand("copy");
       document.body.removeChild(textArea);
+
       return true;
-    } catch (err) {
+    } catch {
       document.body.removeChild(textArea);
+
       return false;
     }
   }
@@ -151,21 +157,22 @@ export const copyToClipboard = async (text: string): Promise<boolean> => {
  */
 export const fuzzyMatch = (text: string, query: string): boolean => {
   if (!query) return true;
-  
+
   const lowerText = text.toLowerCase();
   const lowerQuery = query.toLowerCase();
-  
+
   // Exact match
   if (lowerText.includes(lowerQuery)) return true;
-  
+
   // Fuzzy match: check if all query characters appear in order
   let queryIndex = 0;
+
   for (let i = 0; i < lowerText.length && queryIndex < lowerQuery.length; i++) {
     if (lowerText[i] === lowerQuery[queryIndex]) {
       queryIndex++;
     }
   }
-  
+
   return queryIndex === lowerQuery.length;
 };
 
@@ -173,11 +180,12 @@ export const fuzzyMatch = (text: string, query: string): boolean => {
  * Format timestamp to readable date
  */
 export const formatDate = (date: Date | string): string => {
-  const d = typeof date === 'string' ? new Date(date) : date;
-  return d.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
+  const d = typeof date === "string" ? new Date(date) : date;
+
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
   });
 };
 
