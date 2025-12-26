@@ -7,5 +7,20 @@
 @plugin './heroui-plugin.ts';
 
 @theme {
+  /* FlashFusion Brand Colors */
+  --color-brand-primary: #FF7B00;
+  --color-brand-secondary: #00B4D8;
+  --color-brand-accent: #E91E63;
+  --color-brand-background: #0F172A;
+  --color-brand-surface: #111827;
+  --color-brand-text: #E5E7EB;
+  
+  /* HeroUI Integration */
   --background-image-gradient-border-violet: linear-gradient(hsl(var(--heroui-background)), hsl(var(--heroui-background))), linear-gradient(83.87deg, #F54180, #9353D3);
+  
+  /* FlashFusion Typography */
+  --font-family-display: 'Sora', sans-serif;
+  --font-family-ui: 'Inter', sans-serif;
+  --line-height-base: 1.5;
+  --spacing-grid: 8px;
 }

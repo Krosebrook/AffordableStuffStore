@@ -15,7 +15,8 @@ export default function IndexPage() {
             AI-Powered Creative Mega App
           </span>
           <div className={subtitle({ class: "mt-4" })}>
-            Production-grade SaaS platform for AI content generation, campaign management, and multi-channel publishing.
+            Production-grade SaaS platform for AI content generation, campaign
+            management, and multi-channel publishing.
           </div>
         </div>
 

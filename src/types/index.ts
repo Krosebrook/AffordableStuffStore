@@ -64,7 +64,7 @@ export interface PromptTemplate {
   updated_at: string;
 }
 
-export type PromptCategory = 
+export type PromptCategory =
   | "text"
   | "image"
   | "video"
@@ -108,7 +108,12 @@ export interface Campaign {
   updated_at: string;
 }
 
-export type CampaignStatus = "draft" | "scheduled" | "active" | "paused" | "completed";
+export type CampaignStatus =
+  | "draft"
+  | "scheduled"
+  | "active"
+  | "paused"
+  | "completed";
 
 export interface Schedule {
   id: string;
@@ -121,8 +126,19 @@ export interface Schedule {
   max_retries: number;
 }
 
-export type Channel = "twitter" | "facebook" | "instagram" | "linkedin" | "email" | "blog";
-export type ScheduleStatus = "pending" | "processing" | "published" | "failed" | "cancelled";
+export type Channel =
+  | "twitter"
+  | "facebook"
+  | "instagram"
+  | "linkedin"
+  | "email"
+  | "blog";
+export type ScheduleStatus =
+  | "pending"
+  | "processing"
+  | "published"
+  | "failed"
+  | "cancelled";
 
 // Segment Types
 export interface Segment {
@@ -192,4 +208,3 @@ export interface PromptVote {
   value: 1 | -1;
   created_at: string;
 }
-

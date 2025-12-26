@@ -6,9 +6,7 @@ export default function MarketplacePage() {
     <DefaultLayout>
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
         <div className="inline-block max-w-4xl text-center justify-center">
-          <h1 className={title()}>
-            Prompt Marketplace
-          </h1>
+          <h1 className={title()}>Prompt Marketplace</h1>
           <p className="mt-4 text-default-600 text-lg">
             Browse, remix, and submit community-created prompt packs
           </p>
@@ -68,7 +66,8 @@ export default function MarketplacePage() {
           <div className="mt-6 p-6 rounded-lg bg-default-100">
             <h3 className="text-lg font-bold mb-2">Coming Soon</h3>
             <p className="text-default-600">
-              The Prompt Marketplace is currently under development. Check back soon to explore and share prompt packs!
+              The Prompt Marketplace is currently under development. Check back
+              soon to explore and share prompt packs!
             </p>
           </div>
         </div>

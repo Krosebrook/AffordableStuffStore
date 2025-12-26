@@ -6,11 +6,10 @@ export default function CampaignsPage() {
     <DefaultLayout>
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
         <div className="inline-block max-w-4xl text-center justify-center">
-          <h1 className={title()}>
-            Campaign Wizard
-          </h1>
+          <h1 className={title()}>Campaign Wizard</h1>
           <p className="mt-4 text-default-600 text-lg">
-            Multi-channel scheduling with smart retry logic and audience segmentation
+            Multi-channel scheduling with smart retry logic and audience
+            segmentation
           </p>
         </div>
 
@@ -65,7 +64,8 @@ export default function CampaignsPage() {
           <div className="mt-6 p-6 rounded-lg bg-default-100">
             <h3 className="text-lg font-bold mb-2">Coming Soon</h3>
             <p className="text-default-600">
-              The Campaign Wizard is currently under development. Check back soon for the full multi-channel campaign management experience!
+              The Campaign Wizard is currently under development. Check back
+              soon for the full multi-channel campaign management experience!
             </p>
           </div>
         </div>

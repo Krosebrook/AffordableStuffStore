@@ -4,7 +4,8 @@ import i18next from "../i18n";
 export const siteConfig = () => ({
   needCookieConsent: true,
   name: "FlashFusion",
-  description: "AI-Powered Creative Mega App - Production-grade SaaS platform for content generation and campaign management",
+  description:
+    "AI-Powered Creative Mega App - Production-grade SaaS platform for content generation and campaign management",
   navItems: [
     {
       label: "Home",

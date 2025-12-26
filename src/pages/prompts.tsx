@@ -6,9 +6,7 @@ export default function PromptsPage() {
     <DefaultLayout>
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
         <div className="inline-block max-w-4xl text-center justify-center">
-          <h1 className={title()}>
-            Public Prompt Library
-          </h1>
+          <h1 className={title()}>Public Prompt Library</h1>
           <p className="mt-4 text-default-600 text-lg">
             User-submitted prompts with voting, search, and tag-based filtering
           </p>
@@ -54,21 +52,38 @@ export default function PromptsPage() {
           <div className="mt-6 p-6 rounded-lg bg-default-100">
             <h2 className="text-xl font-bold mb-4">Popular Tags</h2>
             <div className="flex flex-wrap gap-2 text-default-600">
-              <span className="px-3 py-1 rounded-full bg-default-200">#marketing</span>
-              <span className="px-3 py-1 rounded-full bg-default-200">#creative</span>
-              <span className="px-3 py-1 rounded-full bg-default-200">#social-media</span>
-              <span className="px-3 py-1 rounded-full bg-default-200">#content-writing</span>
-              <span className="px-3 py-1 rounded-full bg-default-200">#design</span>
-              <span className="px-3 py-1 rounded-full bg-default-200">#video</span>
-              <span className="px-3 py-1 rounded-full bg-default-200">#music</span>
-              <span className="px-3 py-1 rounded-full bg-default-200">#photography</span>
+              <span className="px-3 py-1 rounded-full bg-default-200">
+                #marketing
+              </span>
+              <span className="px-3 py-1 rounded-full bg-default-200">
+                #creative
+              </span>
+              <span className="px-3 py-1 rounded-full bg-default-200">
+                #social-media
+              </span>
+              <span className="px-3 py-1 rounded-full bg-default-200">
+                #content-writing
+              </span>
+              <span className="px-3 py-1 rounded-full bg-default-200">
+                #design
+              </span>
+              <span className="px-3 py-1 rounded-full bg-default-200">
+                #video
+              </span>
+              <span className="px-3 py-1 rounded-full bg-default-200">
+                #music
+              </span>
+              <span className="px-3 py-1 rounded-full bg-default-200">
+                #photography
+              </span>
             </div>
           </div>
 
           <div className="mt-6 p-6 rounded-lg bg-default-100">
             <h3 className="text-lg font-bold mb-2">Coming Soon</h3>
             <p className="text-default-600">
-              The Public Prompt Library is currently under development. Check back soon to explore and submit prompts!
+              The Public Prompt Library is currently under development. Check
+              back soon to explore and submit prompts!
             </p>
           </div>
         </div>
