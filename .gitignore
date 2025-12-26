@@ -22,8 +22,16 @@ dist-ssr
 *.sln
 *.sw?
 
-
 pnpm-lock.yaml
 yarn.lock
 bun.lockb
 .github/copilot-instructions.md
+
+# Pod AI App specific
+pod-ai-app/.env
+pod-ai-app/mobile/.expo
+pod-ai-app/mobile/.expo-shared
+pod-ai-app/backend/dist
+pod-ai-app/backend/node_modules
+pod-ai-app/mobile/node_modules
+*.tsbuildinfo
