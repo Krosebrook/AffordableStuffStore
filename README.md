@@ -1,33 +1,181 @@
-# Vite & HeroUI Template
+# FlashFusion Core Architecture
 
-This is a template for creating applications using Vite 6 and HeroUI (v2).
+> **⚠️ Architecture Transformation**: This repository has been migrated from a Vite + React template to the **FlashFusion Core Architecture** - a production-ready, enterprise-grade application framework.
 
-[Try it on CodeSandbox](https://githubbox.com/sctg-development/vite-react-heroui-template)
+## 🎯 What is FlashFusion?
 
-## Star the project
+FlashFusion is a modern, full-stack application architecture that combines the best tools and practices for building scalable, secure, and observable applications.
 
-**If you appreciate my work, please consider giving it a star! 🤩**
+### Key Features
 
-## On Github Pages ?
+- ⚡ **Next.js 15** with App Router and React Server Components
+- 🎨 **Tailwind CSS v4** with custom FlashFusion brand colors
+- 🧩 **shadcn/ui** component library for consistent UI
+- 📦 **Turborepo + PNPM** monorepo for efficient builds
+- 🔐 **Supabase** for authentication, database, and storage
+- 👷 **Worker Services** for background processing
+- 📊 **Full Observability** with Sentry, PostHog, and OpenTelemetry
+- 🧪 **Complete Testing** with Vitest and Playwright
+- 🛡️ **Enterprise Security** with RLS, CSP, and CSRF protection
 
-Ths plugin uses our [@sctg/vite-plugin-github-pages-spa](https://github.com/sctg-development/vite-plugin-github-pages-spa) Vite 6 plugin for handling the Github Pages limitations with SPA.  
+## 📖 Documentation
 
-## With OAuth2 authentication ?
+For complete documentation, see **[FLASHFUSION.md](./FLASHFUSION.md)**
 
-If you are looking for a template with OAuth2 authentication, you can check out my other repository: [vite-react-heroui-auth0-template](https://github.com/sctg-development/vite-react-heroui-auth0-template)
-which is the same template with an OAuth2 authentication layer implemented via a free tier on [Auth0](https://auth0.com).
+## 🚀 Quick Start
 
-## Technologies Used
+```bash
+# Install dependencies
+pnpm install
 
-- [Vite 6](https://vitejs.dev/guide/)
-- [HeroUI](https://heroui.com)
-- [Tailwind CSS 4](https://tailwindcss.com)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [React 19](https://reactjs.org)
-- [i18next](https://www.i18next.com)
-- [ESLint 9](https://eslint.org)
-- [TypeScript](https://www.typescriptlang.org)
-- [Framer Motion](https://www.framer.com/motion)
+# Start development
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Run tests
+pnpm test
+pnpm test:e2e
+```
+
+## 🏗️ Architecture Overview
+
+```
+flashfusion/
+├── apps/
+│   ├── web/              # Next.js application
+│   └── workers/          # Background workers
+│       ├── render/       # Render processing
+│       ├── schedule/     # Task scheduling
+│       └── insights/     # Analytics
+├── packages/
+│   ├── ui/               # Shared UI components
+│   ├── config/           # Shared configurations
+│   └── shared/           # Utilities
+└── supabase/
+    └── migrations/       # Database schema
+```
+
+## 🎨 Brand Colors
+
+FlashFusion uses a vibrant, modern color palette:
+
+- **Primary**: `#FF7B00` - Energetic orange
+- **Secondary**: `#00B4D8` - Fresh blue
+- **Accent**: `#E91E63` - Bold pink
+
+Access these in your code via CSS variables:
+```css
+color: var(--color-ff-primary);
+color: var(--color-ff-secondary);
+color: var(--color-ff-accent);
+```
+
+## 🔐 Security First
+
+FlashFusion is built with security as a priority:
+
+- ✅ Row Level Security (RLS) policies on all tables
+- ✅ Content Security Policy (CSP) headers
+- ✅ CSRF token protection
+- ✅ Secure environment variable management
+- ✅ Regular secrets rotation support
+
+## 📊 Built-in Observability
+
+Monitor your application with confidence:
+
+- **Sentry**: Error tracking and performance monitoring
+- **PostHog**: Product analytics and feature flags
+- **OpenTelemetry**: Distributed tracing
+
+## 🧪 Testing Strategy
+
+Comprehensive testing setup:
+
+- **Vitest**: Fast unit and integration tests
+- **Playwright**: Reliable end-to-end testing
+- **Coverage**: Track test coverage automatically
+
+## 🚢 Deployment
+
+Optimized for Vercel Edge deployment:
+
+1. Connect repository to Vercel
+2. Configure environment variables
+3. Deploy automatically on push
+
+Workers can be deployed separately to any Node.js hosting platform.
+
+## 📚 Technologies
+
+### Frontend
+- Next.js 15
+- React 19
+- Tailwind CSS v4
+- shadcn/ui
+- Framer Motion
+
+### Backend
+- Supabase (PostgreSQL)
+- Row Level Security
+- Real-time subscriptions
+- Storage
+
+### Infrastructure
+- Turborepo
+- PNPM workspaces
+- Vercel Edge Runtime
+
+### Observability
+- Sentry
+- PostHog
+- OpenTelemetry
+
+### Testing
+- Vitest
+- Playwright
+- React Testing Library
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our contributing guidelines in [FLASHFUSION.md](./FLASHFUSION.md).
+
+## 📝 License
+
+MIT License - see LICENSE file for details
+
+---
+
+## Migration Notes
+
+### What Changed?
+
+This repository was previously a Vite + React template. It has been transformed into the FlashFusion Core Architecture with:
+
+- ✅ Monorepo structure with Turborepo
+- ✅ Next.js 15 replacing Vite
+- ✅ shadcn/ui replacing HeroUI
+- ✅ Supabase backend integration
+- ✅ Worker services for background tasks
+- ✅ Full observability stack
+- ✅ Comprehensive testing setup
+- ✅ Enterprise security features
+
+### Old Files
+
+Some old configuration files are now deprecated:
+- `index.html` (Next.js handles this)
+- `vite.config.ts` (Using Next.js config)
+- HeroUI components (Replaced with shadcn/ui)
+
+These are ignored in `.gitignore` but remain for reference.
+
+---
+
+**Built with ❤️ using the FlashFusion Core Architecture**
+
 
 ## Adding a New Page
 
