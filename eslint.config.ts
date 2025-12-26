@@ -23,12 +23,11 @@ export default [
         window: "readonly",
         SVGSVGElement: "readonly",
         URL: "readonly",
-        console: "readonly",
-        performance: "readonly",
-        PerformanceNavigationTiming: "readonly",
-        setInterval: "readonly",
-        clearInterval: "readonly",
-        Intl: "readonly",
+        Blob: "readonly",
+        File: "readonly",
+        FileReader: "readonly",
+        navigator: "readonly",
+        setTimeout: "readonly",
       },
       parserOptions: {
         ecmaFeatures: {
