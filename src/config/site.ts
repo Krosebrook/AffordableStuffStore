@@ -28,6 +28,10 @@ export const siteConfig = () => ({
       label: i18next.t("about"),
       href: "/about",
     },
+    {
+      label: i18next.t("flashfusion"),
+      href: "/flashfusion",
+    },
   ],
   navMenuItems: [
     {
