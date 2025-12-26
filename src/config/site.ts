@@ -28,6 +28,10 @@ export const siteConfig = () => ({
       label: i18next.t("about"),
       href: "/about",
     },
+    {
+      label: i18next.t("monitoring"),
+      href: "/monitoring",
+    },
   ],
   navMenuItems: [
     {
@@ -53,6 +57,10 @@ export const siteConfig = () => ({
     {
       label: i18next.t("settings"),
       href: "/settings",
+    },
+    {
+      label: i18next.t("monitoring"),
+      href: "/monitoring",
     },
     {
       label: i18next.t("help-and-feedback"),

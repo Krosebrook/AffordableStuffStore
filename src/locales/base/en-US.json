@@ -13,6 +13,7 @@
   "pricing": "Pricing",
   "blog": "Blog",
   "about": "About",
+  "monitoring": "Monitoring",
   "profile": "Profile",
   "dashboard": "Dashboard",
   "projects": "Projects",
@@ -34,5 +35,15 @@
   "cookie-policy": "Cookie Policy.",
   "accept-all": "Accept All",
   "reject": "Reject",
-  "cookie-consent-title": "Cookies policy"
+  "cookie-consent-title": "Cookies policy",
+  "flashfusion_monitoring": "FlashFusion Monitoring",
+  "flashfusion_subtitle": "Unknown Unknowns Protocol - Comprehensive System Observability",
+  "peak_patterns": "Peak Patterns & Timezone Analysis",
+  "pod_success_rates": "POD Success Rates",
+  "integration_health": "Integration Health",
+  "scalability_thresholds": "Scalability Thresholds",
+  "tech_debt": "Technical Debt",
+  "incidents": "Incident History",
+  "documentation_gaps": "Documentation Gaps",
+  "creator_behaviors": "Creator Behavior Patterns"
 }
