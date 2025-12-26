@@ -1,6 +1,6 @@
 /**
  * FlashFusion Content Studio Type Definitions
- * 
+ *
  * Defines all types for the content generation system including:
  * - Asset types (text, image, video, music)
  * - Brand kit schema
@@ -10,7 +10,7 @@
  */
 
 // Asset types
-export type AssetType = 'text' | 'image' | 'video' | 'music';
+export type AssetType = "text" | "image" | "video" | "music";
 
 export interface ProvenanceMetadata {
   model: string;
@@ -39,7 +39,7 @@ export interface Asset {
 export interface BrandColor {
   name: string;
   hex: string;
-  usage: 'primary' | 'secondary' | 'accent' | 'neutral';
+  usage: "primary" | "secondary" | "accent" | "neutral";
 }
 
 export interface BrandFont {
@@ -65,7 +65,7 @@ export interface BrandKit {
 export interface BrandKitValidationError {
   field: string;
   message: string;
-  severity: 'error' | 'warning';
+  severity: "error" | "warning";
 }
 
 export interface BrandKitValidationResult {
@@ -79,7 +79,7 @@ export interface CampaignScheduleItem {
   assetId: string;
   scheduledAt: Date;
   platform?: string;
-  status: 'pending' | 'published' | 'failed';
+  status: "pending" | "published" | "failed";
 }
 
 export interface Campaign {
@@ -90,7 +90,7 @@ export interface Campaign {
   brandKitId?: string;
   assets: string[]; // Asset IDs
   schedule: CampaignScheduleItem[];
-  status: 'draft' | 'active' | 'completed' | 'archived';
+  status: "draft" | "active" | "completed" | "archived";
   createdAt: Date;
   updatedAt: Date;
 }
@@ -130,7 +130,7 @@ export interface GenerationJob {
   userId: string;
   prompt: string;
   parameters: Record<string, unknown>;
-  status: 'queued' | 'processing' | 'completed' | 'failed';
+  status: "queued" | "processing" | "completed" | "failed";
   retryCount: number;
   maxRetries: number;
   error?: string;
@@ -169,6 +169,6 @@ export interface GenerationRequest {
 
 export interface GenerationResponse {
   jobId: string;
-  status: 'queued' | 'processing';
+  status: "queued" | "processing";
   estimatedTime?: number;
 }

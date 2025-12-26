@@ -1,10 +1,10 @@
 /**
  * FFPack Export Utilities
- * 
+ *
  * Handles exporting brand kits, assets, and campaigns as .ffpack.json files
  */
 
-import type { FFPack, Asset, BrandKit, Preset } from '@/types/flashfusion';
+import type { FFPack, Asset, BrandKit, Preset } from "@/types/flashfusion";
 
 /**
  * Export assets and metadata as FFPack format
@@ -17,20 +17,21 @@ export function exportFFPack(
   description?: string,
 ): FFPack {
   const ffpack: FFPack = {
-    version: '1.0.0',
+    version: "1.0.0",
     name,
     description,
     exportedAt: new Date(),
-    assets: assets.map(asset => ({
+    assets: assets.map((asset) => ({
       type: asset.type,
       name: asset.name,
-      content: typeof asset.content === 'string' ? asset.content : '[Binary Data]',
+      content:
+        typeof asset.content === "string" ? asset.content : "[Binary Data]",
       provenance: asset.provenance,
       metadata: asset.metadata,
     })),
     metadata: {
       totalAssets: assets.length,
-      assetTypes: [...new Set(assets.map(a => a.type))],
+      assetTypes: [...new Set(assets.map((a) => a.type))],
     },
   };
 
@@ -64,16 +65,17 @@ export function ffpackToJSON(ffpack: FFPack): string {
  */
 export function downloadFFPack(ffpack: FFPack): void {
   const json = ffpackToJSON(ffpack);
-  const blob = new Blob([json], { type: 'application/json' });
+  const blob = new Blob([json], { type: "application/json" });
   const url = URL.createObjectURL(blob);
-  
-  const link = document.createElement('a');
+
+  const link = document.createElement("a");
+
   link.href = url;
-  link.download = `${ffpack.name.replace(/\s+/g, '-').toLowerCase()}.ffpack.json`;
+  link.download = `${ffpack.name.replace(/\s+/g, "-").toLowerCase()}.ffpack.json`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-  
+
   URL.revokeObjectURL(url);
 }
 
@@ -82,10 +84,10 @@ export function downloadFFPack(ffpack: FFPack): void {
  */
 export function parseFFPack(json: string): FFPack {
   const data = JSON.parse(json);
-  
+
   // Validate required fields
   if (!data.version || !data.name || !data.assets) {
-    throw new Error('Invalid FFPack format');
+    throw new Error("Invalid FFPack format");
   }
 
   // Convert date strings back to Date objects
@@ -103,18 +105,19 @@ export function parseFFPack(json: string): FFPack {
 export async function importFFPack(file: File): Promise<FFPack> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    
+
     reader.onload = (e) => {
       try {
         const json = e.target?.result as string;
         const ffpack = parseFFPack(json);
+
         resolve(ffpack);
       } catch (error) {
         reject(error);
       }
     };
-    
-    reader.onerror = () => reject(new Error('Failed to read file'));
+
+    reader.onerror = () => reject(new Error("Failed to read file"));
     reader.readAsText(file);
   });
 }
@@ -122,19 +125,22 @@ export async function importFFPack(file: File): Promise<FFPack> {
 /**
  * Validate FFPack structure
  */
-export function validateFFPack(ffpack: any): { valid: boolean; errors: string[] } {
+export function validateFFPack(ffpack: any): {
+  valid: boolean;
+  errors: string[];
+} {
   const errors: string[] = [];
 
   if (!ffpack.version) {
-    errors.push('Missing version field');
+    errors.push("Missing version field");
   }
 
   if (!ffpack.name) {
-    errors.push('Missing name field');
+    errors.push("Missing name field");
   }
 
   if (!ffpack.assets || !Array.isArray(ffpack.assets)) {
-    errors.push('Missing or invalid assets field');
+    errors.push("Missing or invalid assets field");
   } else {
     ffpack.assets.forEach((asset: any, index: number) => {
       if (!asset.type) {

@@ -1,11 +1,11 @@
 /**
  * Worker System for Async Generation with Retry Logic
- * 
+ *
  * Manages background job processing for asset generation
  * Implements retry logic for failed jobs
  */
 
-import type { GenerationJob, AssetType } from '@/types/flashfusion';
+import type { GenerationJob, AssetType } from "@/types/flashfusion";
 
 export class WorkerService {
   private jobs: Map<string, GenerationJob> = new Map();
@@ -29,7 +29,7 @@ export class WorkerService {
       userId,
       prompt,
       parameters,
-      status: 'queued',
+      status: "queued",
       retryCount: 0,
       maxRetries: this.maxRetries,
       createdAt: new Date(),
@@ -38,7 +38,7 @@ export class WorkerService {
 
     this.jobs.set(job.id, job);
     this.processJob(job.id);
-    
+
     return job;
   }
 
@@ -47,11 +47,12 @@ export class WorkerService {
    */
   private async processJob(jobId: string): Promise<void> {
     const job = this.jobs.get(jobId);
+
     if (!job) return;
 
     try {
       // Update status to processing
-      job.status = 'processing';
+      job.status = "processing";
       job.updatedAt = new Date();
       this.jobs.set(jobId, job);
 
@@ -59,33 +60,38 @@ export class WorkerService {
       await this.executeJob(job);
 
       // Mark as completed
-      job.status = 'completed';
+      job.status = "completed";
       job.resultAssetId = `asset_${Date.now()}`;
       job.updatedAt = new Date();
       this.jobs.set(jobId, job);
-
     } catch (error) {
       // Handle failure
       job.retryCount++;
       job.updatedAt = new Date();
-      
+
       if (job.retryCount < job.maxRetries) {
         // Retry with exponential backoff
         const delay = this.retryDelay * Math.pow(2, job.retryCount - 1);
-        job.status = 'queued';
-        job.error = error instanceof Error ? error.message : 'Unknown error';
+
+        job.status = "queued";
+        job.error = error instanceof Error ? error.message : "Unknown error";
         this.jobs.set(jobId, job);
-        
-        console.log(`Retrying job ${jobId} (attempt ${job.retryCount}/${job.maxRetries}) in ${delay}ms`);
-        
+
+        console.log(
+          `Retrying job ${jobId} (attempt ${job.retryCount}/${job.maxRetries}) in ${delay}ms`,
+        );
+
         setTimeout(() => this.processJob(jobId), delay);
       } else {
         // Max retries reached
-        job.status = 'failed';
-        job.error = error instanceof Error ? error.message : 'Unknown error';
+        job.status = "failed";
+        job.error = error instanceof Error ? error.message : "Unknown error";
         this.jobs.set(jobId, job);
-        
-        console.error(`Job ${jobId} failed after ${job.retryCount} retries:`, job.error);
+
+        console.error(
+          `Job ${jobId} failed after ${job.retryCount} retries:`,
+          job.error,
+        );
       }
     }
   }
@@ -102,11 +108,13 @@ export class WorkerService {
       music: 4000,
     };
 
-    await new Promise(resolve => setTimeout(resolve, processingTimes[job.type]));
+    await new Promise((resolve) =>
+      setTimeout(resolve, processingTimes[job.type]),
+    );
 
     // Simulate random failures for testing retry logic
     if (Math.random() < 0.1 && job.retryCount < 2) {
-      throw new Error('Simulated processing error');
+      throw new Error("Simulated processing error");
     }
 
     console.log(`Job ${job.id} executed successfully`);
@@ -123,14 +131,16 @@ export class WorkerService {
    * Get all jobs for an organization
    */
   getJobsByOrg(orgId: string): GenerationJob[] {
-    return Array.from(this.jobs.values()).filter(job => job.orgId === orgId);
+    return Array.from(this.jobs.values()).filter((job) => job.orgId === orgId);
   }
 
   /**
    * Get jobs by status
    */
-  getJobsByStatus(status: GenerationJob['status']): GenerationJob[] {
-    return Array.from(this.jobs.values()).filter(job => job.status === status);
+  getJobsByStatus(status: GenerationJob["status"]): GenerationJob[] {
+    return Array.from(this.jobs.values()).filter(
+      (job) => job.status === status,
+    );
   }
 
   /**
@@ -138,15 +148,16 @@ export class WorkerService {
    */
   cancelJob(jobId: string): boolean {
     const job = this.jobs.get(jobId);
-    if (!job || job.status === 'completed' || job.status === 'failed') {
+
+    if (!job || job.status === "completed" || job.status === "failed") {
       return false;
     }
 
-    job.status = 'failed';
-    job.error = 'Cancelled by user';
+    job.status = "failed";
+    job.error = "Cancelled by user";
     job.updatedAt = new Date();
     this.jobs.set(jobId, job);
-    
+
     return true;
   }
 
@@ -158,8 +169,10 @@ export class WorkerService {
     let cleaned = 0;
 
     for (const [jobId, job] of this.jobs.entries()) {
-      if ((job.status === 'completed' || job.status === 'failed') &&
-          now - job.updatedAt.getTime() > olderThanMs) {
+      if (
+        (job.status === "completed" || job.status === "failed") &&
+        now - job.updatedAt.getTime() > olderThanMs
+      ) {
         this.jobs.delete(jobId);
         cleaned++;
       }
@@ -176,5 +189,6 @@ export function getWorkerService(): WorkerService {
   if (!workerServiceInstance) {
     workerServiceInstance = new WorkerService();
   }
+
   return workerServiceInstance;
 }

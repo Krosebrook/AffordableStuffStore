@@ -1,6 +1,6 @@
 /**
  * Supabase Client Configuration
- * 
+ *
  * Configures the Supabase client for backend interactions
  * Supports both browser and server-side usage
  */
@@ -16,9 +16,9 @@ export interface SupabaseConfig {
 
 // Mock configuration - replace with actual Supabase credentials
 export const supabaseConfig: SupabaseConfig = {
-  url: import.meta.env.VITE_SUPABASE_URL || 'https://your-project.supabase.co',
-  anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY || 'your-anon-key',
-  bucketName: 'flashfusion-assets',
+  url: import.meta.env.VITE_SUPABASE_URL || "https://your-project.supabase.co",
+  anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY || "your-anon-key",
+  bucketName: "flashfusion-assets",
 };
 
 /**
@@ -42,12 +42,12 @@ export class SupabaseClient {
   ): Promise<{ url: string; error?: string }> {
     // Mock implementation
     // In production: supabase.storage.from(bucketName).upload(path, file)
-    
-    console.log('Uploading asset:', { path, orgId, fileSize: file.size });
-    
+
+    console.log("Uploading asset:", { path, orgId, fileSize: file.size });
+
     // Simulate upload delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     // Return mock URL
     return {
       url: `${this.config.url}/storage/v1/object/public/${this.config.bucketName}/${path}`,
@@ -57,12 +57,14 @@ export class SupabaseClient {
   /**
    * Download an asset from Supabase storage
    */
-  async downloadAsset(path: string): Promise<{ data: Blob | null; error?: string }> {
-    console.log('Downloading asset:', path);
-    
+  async downloadAsset(
+    path: string,
+  ): Promise<{ data: Blob | null; error?: string }> {
+    console.log("Downloading asset:", path);
+
     // Mock implementation
     return {
-      data: new Blob(['mock data']),
+      data: new Blob(["mock data"]),
     };
   }
 
@@ -70,8 +72,8 @@ export class SupabaseClient {
    * Delete an asset from Supabase storage
    */
   async deleteAsset(path: string): Promise<{ error?: string }> {
-    console.log('Deleting asset:', path);
-    
+    console.log("Deleting asset:", path);
+
     // Mock implementation
     return {};
   }
@@ -79,9 +81,12 @@ export class SupabaseClient {
   /**
    * List assets in a directory with RLS filtering
    */
-  async listAssets(orgId: string, prefix?: string): Promise<{ data: string[]; error?: string }> {
-    console.log('Listing assets:', { orgId, prefix });
-    
+  async listAssets(
+    orgId: string,
+    prefix?: string,
+  ): Promise<{ data: string[]; error?: string }> {
+    console.log("Listing assets:", { orgId, prefix });
+
     // Mock implementation with RLS filtering
     return {
       data: [],
@@ -96,5 +101,6 @@ export function getSupabaseClient(): SupabaseClient {
   if (!supabaseClientInstance) {
     supabaseClientInstance = new SupabaseClient(supabaseConfig);
   }
+
   return supabaseClientInstance;
 }
