@@ -1,44 +1,45 @@
 /**
  * FlashFusion Skeleton Loader Components
- * 
+ *
  * Reusable skeleton components with shimmer effects
  * for better perceived performance during loading states
  */
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { fadeIn } from '@/config/motion';
+import React from "react";
+import { motion } from "framer-motion";
+
+import { fadeIn } from "@/config/motion";
 
 export interface SkeletonProps {
   className?: string;
   width?: string | number;
   height?: string | number;
-  variant?: 'text' | 'circular' | 'rectangular' | 'rounded';
-  animation?: 'shimmer' | 'pulse' | 'wave' | 'none';
+  variant?: "text" | "circular" | "rectangular" | "rounded";
+  animation?: "shimmer" | "pulse" | "wave" | "none";
 }
 
 /**
  * Base Skeleton component with shimmer effect
  */
 export const Skeleton: React.FC<SkeletonProps> = ({
-  className = '',
+  className = "",
   width,
   height,
-  variant = 'rectangular',
-  animation = 'shimmer',
+  variant = "rectangular",
+  animation = "shimmer",
 }) => {
   const variantClasses = {
-    text: 'skeleton-text h-4',
-    circular: 'skeleton-avatar rounded-full',
-    rectangular: 'skeleton rounded-none',
-    rounded: 'skeleton rounded-lg',
+    text: "skeleton-text h-4",
+    circular: "skeleton-avatar rounded-full",
+    rectangular: "skeleton rounded-none",
+    rounded: "skeleton rounded-lg",
   };
 
-  const animationClass = animation !== 'none' ? 'skeleton' : 'bg-default-200';
+  const animationClass = animation !== "none" ? "skeleton" : "bg-default-200";
 
   const style: React.CSSProperties = {
-    width: width || '100%',
-    height: height || (variant === 'text' ? '1em' : '100%'),
+    width: width || "100%",
+    height: height || (variant === "text" ? "1em" : "100%"),
   };
 
   return (
@@ -55,25 +56,31 @@ export const Skeleton: React.FC<SkeletonProps> = ({
 /**
  * Skeleton Text component - for single line text
  */
-export const SkeletonText: React.FC<Omit<SkeletonProps, 'variant'>> = (props) => {
+export const SkeletonText: React.FC<Omit<SkeletonProps, "variant">> = (
+  props,
+) => {
   return <Skeleton {...props} variant="text" />;
 };
 
 /**
  * Skeleton Avatar component - circular skeleton
  */
-export const SkeletonAvatar: React.FC<Omit<SkeletonProps, 'variant'>> = ({
-  width = '3rem',
-  height = '3rem',
+export const SkeletonAvatar: React.FC<Omit<SkeletonProps, "variant">> = ({
+  width = "3rem",
+  height = "3rem",
   ...props
 }) => {
-  return <Skeleton {...props} variant="circular" width={width} height={height} />;
+  return (
+    <Skeleton {...props} height={height} variant="circular" width={width} />
+  );
 };
 
 /**
  * Skeleton Card component - for card layouts
  */
-export const SkeletonCard: React.FC<{ className?: string }> = ({ className = '' }) => {
+export const SkeletonCard: React.FC<{ className?: string }> = ({
+  className = "",
+}) => {
   return (
     <motion.div
       className={`space-y-4 p-4 border border-default-200 rounded-lg ${className}`}
@@ -98,29 +105,35 @@ export const SkeletonCard: React.FC<{ className?: string }> = ({ className = '' 
 /**
  * Skeleton Button component
  */
-export const SkeletonButton: React.FC<Omit<SkeletonProps, 'variant'>> = ({
-  width = '8rem',
-  height = '2.5rem',
+export const SkeletonButton: React.FC<Omit<SkeletonProps, "variant">> = ({
+  width = "8rem",
+  height = "2.5rem",
   ...props
 }) => {
-  return <Skeleton {...props} variant="rounded" width={width} height={height} />;
+  return (
+    <Skeleton {...props} height={height} variant="rounded" width={width} />
+  );
 };
 
 /**
  * Skeleton Image component
  */
-export const SkeletonImage: React.FC<Omit<SkeletonProps, 'variant'>> = ({
-  width = '100%',
-  height = '12rem',
+export const SkeletonImage: React.FC<Omit<SkeletonProps, "variant">> = ({
+  width = "100%",
+  height = "12rem",
   ...props
 }) => {
-  return <Skeleton {...props} variant="rounded" width={width} height={height} />;
+  return (
+    <Skeleton {...props} height={height} variant="rounded" width={width} />
+  );
 };
 
 /**
  * Skeleton Table Row component
  */
-export const SkeletonTableRow: React.FC<{ columns?: number }> = ({ columns = 4 }) => {
+export const SkeletonTableRow: React.FC<{ columns?: number }> = ({
+  columns = 4,
+}) => {
   return (
     <motion.tr {...fadeIn}>
       {Array.from({ length: columns }).map((_, index) => (
@@ -160,7 +173,7 @@ export const SkeletonList: React.FC<{ items?: number }> = ({ items = 5 }) => {
     <motion.div className="space-y-3" {...fadeIn}>
       {Array.from({ length: items }).map((_, index) => (
         <div key={index} className="flex items-center space-x-3">
-          <SkeletonAvatar width="2rem" height="2rem" />
+          <SkeletonAvatar height="2rem" width="2rem" />
           <div className="flex-1 space-y-2">
             <SkeletonText width="70%" />
             <SkeletonText width="50%" />
@@ -201,7 +214,7 @@ export const SkeletonPage: React.FC = () => {
         <Skeleton height="3rem" width="60%" />
         <Skeleton height="1.5rem" width="40%" />
       </div>
-      <SkeletonGrid items={6} columns={3} />
+      <SkeletonGrid columns={3} items={6} />
     </motion.div>
   );
 };

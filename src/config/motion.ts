@@ -1,11 +1,11 @@
 /**
  * FlashFusion Framer Motion Configuration
- * 
+ *
  * Default animation settings with cubic-bezier(0.4, 0, 0.2, 1)
  * ease-in-out timing for smooth transitions
  */
 
-import { type Transition } from 'framer-motion';
+import { type Transition } from "framer-motion";
 
 /**
  * Default easing function for FlashFusion animations
@@ -41,7 +41,7 @@ export const slowTransition: Transition = {
  * Spring transition with FlashFusion easing
  */
 export const springTransition: Transition = {
-  type: 'spring',
+  type: "spring",
   stiffness: 300,
   damping: 30,
 };
