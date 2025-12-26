@@ -2,19 +2,18 @@ export type SiteConfig = typeof siteConfig;
 import i18next from "../i18n";
 
 export const siteConfig = () => ({
-  needCookieConsent: true, // Set to false if you don't need cookie consent
-  name: i18next.t("vite-heroui"),
-  description: i18next.t(
-    "make-beautiful-websites-regardless-of-your-design-experience",
-  ),
+  needCookieConsent: true,
+  name: "FlashFusion",
+  description:
+    "AI-powered SaaS for content generation, campaign management, and multi-channel publishing",
   navItems: [
     {
-      label: i18next.t("home"),
+      label: "Home",
       href: "/",
     },
     {
-      label: i18next.t("docs"),
-      href: "/docs",
+      label: "Prompt Builder",
+      href: "/prompt-builder",
     },
     {
       label: i18next.t("marketplace"),
@@ -29,12 +28,16 @@ export const siteConfig = () => ({
       href: "/pricing",
     },
     {
-      label: i18next.t("blog"),
-      href: "/blog",
+      label: "Campaigns",
+      href: "/campaigns",
     },
     {
-      label: i18next.t("about"),
-      href: "/about",
+      label: "Marketplace",
+      href: "/marketplace",
+    },
+    {
+      label: "Prompts",
+      href: "/prompts",
     },
     {
       label: i18next.t("flashfusion"),
@@ -43,24 +46,28 @@ export const siteConfig = () => ({
   ],
   navMenuItems: [
     {
-      label: i18next.t("profile"),
-      href: "/profile",
+      label: "Home",
+      href: "/",
     },
     {
-      label: i18next.t("dashboard"),
-      href: "/dashboard",
+      label: "Prompt Builder",
+      href: "/prompt-builder",
     },
     {
-      label: i18next.t("projects"),
-      href: "/projects",
+      label: "Content Studio",
+      href: "/content-studio",
     },
     {
-      label: i18next.t("team"),
-      href: "/team",
+      label: "Campaigns",
+      href: "/campaigns",
     },
     {
-      label: i18next.t("calendar"),
-      href: "/calendar",
+      label: "Marketplace",
+      href: "/marketplace",
+    },
+    {
+      label: "Prompts",
+      href: "/prompts",
     },
     {
       label: i18next.t("settings"),
@@ -80,10 +87,10 @@ export const siteConfig = () => ({
     },
   ],
   links: {
-    github: "https://github.com/heroui-inc/heroui",
-    twitter: "https://twitter.com/hero_ui",
-    docs: "https://heroui.com",
-    discord: "https://discord.gg/9b6yyZKmH4",
-    sponsor: "https://github.com/sponsors/sctg-development",
+    github: "https://github.com/Krosebrook/AffordableStuffStore",
+    twitter: "https://twitter.com/flashfusion",
+    docs: "/docs",
+    discord: "https://discord.gg/flashfusion",
+    sponsor: "https://github.com/sponsors/flashfusion",
   },
 });

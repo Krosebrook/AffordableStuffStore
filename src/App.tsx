@@ -17,6 +17,11 @@ function App() {
       <CookieConsent />
       <Routes>
         <Route element={<IndexPage />} path="/" />
+        <Route element={<PromptBuilderPage />} path="/prompt-builder" />
+        <Route element={<ContentStudioPage />} path="/content-studio" />
+        <Route element={<CampaignsPage />} path="/campaigns" />
+        <Route element={<MarketplacePage />} path="/marketplace" />
+        <Route element={<PromptsPage />} path="/prompts" />
         <Route element={<DocsPage />} path="/docs" />
         <Route element={<PricingPage />} path="/pricing" />
         <Route element={<BlogPage />} path="/blog" />

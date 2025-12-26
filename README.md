@@ -315,269 +315,200 @@ Start your development server and verify that:
 
 That's it! You've successfully added a new page with the default layout and included it in the navigation menus.
 
-## Internationalization
+### 3. Campaign Wizard
+- Multi-channel scheduling (social media, email, blog)
+- Smart retry logic for failed posts
+- Campaign analytics and performance tracking
+- Audience segmentation
 
-This template uses i18next for internationalization. The configuration and available languages are defined in the `src/i18n.ts` file.
+### 4. Marketplace
+- Browse community-created prompt packs
+- Remix and customize existing prompts
+- Submit your own prompt packs
+- Rating and review system
 
-### Adding a New Language
+### 5. Public Prompt Library
+- User-submitted prompts
+- Voting system
+- Tag-based search and filtering
+- Trending prompts
 
-This template supports multiple languages through i18next. Follow this comprehensive guide to add a new language:
+## Technologies Used
 
-#### Step 1: Determine the Language Code
+### Core Stack (Current Implementation)
+- [Vite 6](https://vitejs.dev) - Fast build tool with HMR
+- [React 19](https://reactjs.org) - UI library
+- [TypeScript](https://www.typescriptlang.org) - Type safety
+- [Tailwind CSS 4](https://tailwindcss.com) - Utility-first CSS
+- [HeroUI](https://heroui.com) - Component library
+- [Framer Motion](https://www.framer.com/motion) - Animation library
+- [i18next](https://www.i18next.com) - Internationalization
 
-Choose the appropriate language code using the ISO format:
+### Planned Migration
+The application is currently built with Vite for rapid prototyping. Future versions will migrate to:
+- [Next.js 15](https://nextjs.org) - React framework with App Router for production deployment
+- [Supabase](https://supabase.com) - Auth, Database (Postgres + RLS), Storage
+- [Vercel](https://vercel.com) - Deployment platform with Edge Functions
+- [Turborepo](https://turbo.build/repo) - Monorepo build system
 
-- For region-specific language: use language-REGION format (e.g., `fr-FR`, `en-US`, `pt-BR`)
-- For right-to-left languages (Arabic, Hebrew, etc.), make sure to set `isRTL: true`
+### Developer Tools
+- [ESLint 9](https://eslint.org) - Linting
+- [Vitest](https://vitest.dev) - Unit testing (planned)
+- [Playwright](https://playwright.dev) - E2E testing (planned)
 
-#### Step 2: Update the Available Languages Array
+## Security
 
-Open `src/i18n.ts` and add your new language to the `availableLanguages` array:
+FlashFusion implements enterprise-grade security practices:
 
-```typescript
-export const availableLanguages: AvailableLanguage[] = [
-  { code: "en-US", nativeName: "English", isRTL: false, isDefault: true },
-  // Existing languages...
-  { code: "pt-BR", nativeName: "Português do Brasil", isRTL: false }, // Add your new language
-];
+- **Row Level Security (RLS)**: All database tables enforce org_id scoping (planned)
+- **Input Validation**: Zod schemas validate all API inputs
+- **Provenance Logging**: Track model, prompt_hash, and dataset_tag for all generated content
+- **OWASP Top 10**: Comprehensive security checklist enforced in CI/CD
+- **Encryption**: TLS 1.3, AES-256 for data at rest
+- **Authentication**: JWT with refresh tokens, secure session management
+
+## Performance Budgets
+
+Performance metrics enforced in CI:
+
+- **TTFB**: ≤ 150ms (Time to First Byte)
+- **LCP**: ≤ 2.5s (Largest Contentful Paint)
+- **INP**: ≤ 200ms (Interaction to Next Paint)
+- **CLS**: ≤ 0.08 (Cumulative Layout Shift)
+- **JavaScript**: ≤ 180KB gzip per route
+- **CSS**: ≤ 35KB gzip
+
+## Database Schema
+
+FlashFusion uses Supabase Postgres with Row Level Security:
+
+### Core Tables
+- `orgs` - Organization data
+- `members` - Team members and permissions
+- `brand_kits` - Brand assets, colors, fonts, logos
+- `templates` - Prompt templates and presets
+- `assets` - Generated content assets
+- `campaigns` - Marketing campaigns
+- `segments` - Audience segments
+- `schedules` - Scheduled posts and content
+- `marketplace_items` - Community prompt packs
+- `public_prompts` - User-submitted prompts
+
+### RLS Policy
+```sql
+WHERE org_id = auth.uid() OR is_public = true
 ```
 
-#### Step 3: Create the Translation File
+## API Routes (Edge Functions)
 
-1. Copy an existing translation file as a starting point:
+- `/api/content/generate` - Generate assets with provenance tracking
+- `/api/campaigns/draft` - Create campaign with segmentation
+- `/api/schedule` - Schedule posts with retry logic
+- `/api/marketplace/browse` - Browse marketplace items
+- `/api/prompts/submit` - Submit prompts to public library
+
+## CI/CD Pipeline
+
+GitHub Actions workflow:
+1. **Lint** - ESLint code quality checks
+2. **Typecheck** - TypeScript type validation
+3. **Unit Tests** - Vitest with ≥80% coverage
+4. **Build** - Production build verification
+5. **E2E Tests** - Playwright golden paths
+6. **Lighthouse CI** - Performance budget enforcement
+7. **Deploy** - Vercel deployment with rollback on failure
+
+OIDC for secrets, Supabase migrations auto-applied.
+
+## Testing
+
+- **Unit Tests**: Vitest (≥80% coverage requirement)
+- **E2E Tests**: Playwright (critical user journeys)
+- **Visual Regression**: Percy/Chromatic for UI consistency
+- **Load Testing**: k6/Artillery (500 concurrent users target)
+
+## Brand Identity
+
+### Colors
+- **Primary**: `#FF7B00` (Orange)
+- **Secondary**: `#00B4D8` (Blue)
+- **Accent**: `#E91E63` (Pink)
+- **Background**: `#0F172A` (Dark Navy)
+- **Surface**: `#111827` (Dark Gray)
+- **Text**: `#E5E7EB` (Light Gray)
+
+### Typography
+- **Display Font**: Sora
+- **UI Font**: Inter
+- **Line Height**: 1.5
+- **Grid**: 8pt spacing system
+
+## Unknown Unknowns to Monitor
+
+Important metrics to track in production:
+
+1. Real creator behavior (batch vs daily publish patterns)
+2. Peak traffic patterns (timezone, seasonality)
+3. POD success rates by vendor/product
+4. Integration health (which channels fail most?)
+5. Scalability thresholds (when does RLS/JWT become bottleneck?)
+
+## Setup
 
 ```bash
-# In your project root
-cp src/locales/base/en-US.json src/locales/base/pt-BR.json
+# Install dependencies
+pnpm install
+
+# Copy environment variables
+cp .env.example .env.local
+
+# Add your Supabase credentials to .env.local
+# - VITE_SUPABASE_URL
+# - VITE_SUPABASE_ANON_KEY
+# - SUPABASE_SERVICE_ROLE_KEY (for server-side operations)
+
+# Start development server
+pnpm dev
 ```
 
-2. Translate all values (right side) in the new file while keeping the keys (left side) unchanged:
-
-```jsonc
-{
-  "search": "Pesquisar",
-  "twitter": "Twitter",
-  "discord": "Discord",
-  // ... translate all other entries
-}
-```
-
-#### Step 4: Update the Load Path Function
-
-In `src/i18n.ts`, add a case for your new language in the `loadPath` function:
-
-```typescript
-backend: {
-  loadPath: (lng, ns) => {
-    let url: URL = new URL("./locales/base/en-US.json", import.meta.url);
-    
-    switch (ns[0]) {
-      case "base":
-        switch (lng[0]) {
-          case "en-US":
-            url = new URL("./locales/base/en-US.json", import.meta.url);
-            break;
-          // ... existing languages
-          case "pt-BR": // Add your new language case
-            url = new URL("./locales/base/pt-BR.json", import.meta.url);
-            break;
-          default:
-            url = new URL("./locales/base/en-US.json", import.meta.url);
-        }
-        break;
-      default:
-        url = new URL("./locales/base/en-US.json", import.meta.url);
-    }
-    
-    return url.toString();
-  },
-}
-```
-
-#### Step 5: Special Considerations
-
-**For RTL Languages (Arabic, Hebrew, etc.):**
-
-- Set `isRTL: true` in the language definition
-- Ensure your UI components handle RTL layout properly
-- Test thoroughly as some components may need specific RTL adjustments
-
-**For Languages with Special Characters:**
-
-- Ensure proper UTF-8 encoding in your JSON files
-- Test with the longest translated strings to check for layout issues
-
-**For Chinese, Japanese, Korean:**
-
-- Consider using a shorter display format in the language switcher
-- You might want to customize the language display in `LanguageSwitch` component
-
-#### Step 6: Test Your New Language
-
-1. Start your development server
-2. Switch to the newly added language using the language selector
-3. Verify all text is properly translated
-4. Check that special layouts (like RTL) work correctly
-5. Test on different screen sizes to ensure translations don't break layouts
-
-#### Step 7: Translation Tools (Optional)
-
-To simplify the translation process, consider using:
-
-- [i18n Ally](https://marketplace.visualstudio.com/items?itemName=Lokalise.i18n-ally) VS Code extension
-- Export/import with spreadsheets for collaboration with translators
-- Machine translation services for first drafts (DeepL, Google Translate)
-- Use the included command to extract missing translations from the code
-
-#### Troubleshooting
-
-- **Language not appearing in dropdown**: Check that you've added it to the `availableLanguages` array correctly
-- **Untranslated text**: Ensure all keys from the base language exist in your new translation file
-- **Garbled text**: Verify your JSON file is saved with UTF-8 encoding
-- **Layout issues**: Some translations may be longer and need UI adjustments
-
-### Language Switch Component
-
-The `LanguageSwitch` component allows users to switch between the available languages. It is defined in the `src/components/language-switch.tsx` file.
-
-- The component uses the i18n instance to change the language and update the document metadata.
-- It automatically updates the document direction based on the language (left-to-right or right-to-left).
-- The selected language is stored in `localStorage` to persist the user's preference.
-
-### Example Usage
-
-To use the `LanguageSwitch` component in your application, simply include it in your JSX:
-
-```tsx
-<LanguageSwitch availableLanguages={[{ code: "en-US", nativeName: "English", isRTL: false, isDefault: true },{ code: "fr-FR", nativeName: "Français", isRTL: false }]} />
-```
-
-or more simply using the `availableLanguages` array defined in the `src/i18n.ts` file:
-
-```tsx
-import { availableLanguages } from "@/i18n";
-<LanguageSwitch availableLanguages={availableLanguages} />
-```
-
-This component will render a dropdown menu with the available languages, allowing users to switch languages easily.
-
-### Lazy Loading
-
-The default configuration uses the `i18next-http-backend` plugin for language lazy loading. This means that translations are loaded only when needed, improving the application's performance.
-
-### Summary
-
-- **Configuration:** `src/i18n.ts`
-- **Translations:** `src/locales/base`
-- **Language Switch:** `src/components/language-switch.tsx`
-
-By following the steps above, you can easily add new languages and manage internationalization for your application.
-
-## Cookie Consent
-
-This template includes a cookie consent management system to comply with privacy regulations like GDPR. The system displays a modal dialog asking users for consent to use cookies and stores their preference in the browser's localStorage.
-<img width="944" alt="Capture d’écran 2025-04-11 à 19 55 13" src="https://github.com/user-attachments/assets/8769525c-bef0-4705-9b2e-6664aa68a9e0" />
-
-### Features
-
-- Modern modal-based UI with blur backdrop
-- Internationalized content for all supported languages
-- Stores user preferences in localStorage
-- Provides a context API for checking consent status throughout the application
-- Supports both accepting and rejecting cookies
-
-### Configuration
-
-The cookie consent feature can be enabled or disabled through the site configuration:
-
-1. **Enable/Disable Cookie Consent:**
-   - Open the `src/config/site.ts` file
-   - Set the `needCookieConsent` property to `true` or `false`:
-
-```typescript
-export const siteConfig = () => ({
-  needCookieConsent: true, // Set to false if you don't need cookie consent
-  // ...other configuration
-});
-```
-
-### Implementation Details
-
-- **Context Provider:** `src/contexts/cookie-consent-context.tsx` - Provides a React context to manage consent state
-- **UI Component:** `src/components/cookie-consent.tsx` - Renders the consent modal using HeroUI components
-- **Consent Status:** The consent status can be one of three values:
-  - `pending`: Initial state, user hasn't made a decision yet
-  - `accepted`: User has accepted cookies
-  - `rejected`: User has rejected cookies
-
-### Using Cookie Consent in Your Components
-
-You can access the cookie consent status in any component using the `useCookieConsent` hook:
-
-```tsx
-import { useCookieConsent } from "@/contexts/cookie-consent-context";
-
-const MyComponent = () => {
-  const { cookieConsent, acceptCookies, rejectCookies, resetCookieConsent } = useCookieConsent();
-  
-  // Load analytics only if cookies are accepted
-  useEffect(() => {
-    if (cookieConsent === "accepted") {
-      // Initialize analytics, tracking scripts, etc.
-    }
-  }, [cookieConsent]);
-  
-  // ...rest of your component
-};
-```
-
-### Customization
-
-- Modify the appearance of the consent modal in `src/components/cookie-consent.tsx`
-- Add custom tracking or cookie management logic in the `acceptCookies` and `rejectCookies` functions in `src/contexts/cookie-consent-context.tsx`
-- Update the cookie policy text in the language files (e.g., `src/locales/base/en-US.json`)
-
-## Tailwind CSS 4
-
-This template uses Tailwind CSS 4, which is a utility-first CSS framework. You can customize the styles by modifying the `tailwind.config.js` file.  
-Currently HeroUI uses Tailwind CSS 3, but [@winchesHe](https://github.com/winchesHe)  create a port of HeroUI to Tailwind CSS 4, you can find it [here](https://github.com/heroui-inc/heroui/pull/4656), HeroUI packages are available at <https://github.com/heroui-inc/heroui/pull/4656#issuecomment-2651218074>.
-
-## How to Use
-
-To clone the project, run the following command:
+## Deploy
 
 ```bash
-git clone https://github.com/sctg-development/vite-react-heroui-template.git
+# Build for production
+pnpm build
+
+# Deploy to Vercel
+vercel --prod
 ```
 
-### Manual chunk splitting
+## Project Structure
 
-In the `vite.config.ts` file, all `@heroui` packages are manually split into a separate chunk. This is done to reduce the size of the main bundle. You can remove this configuration if you don't want to split the packages.
-
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
-
-```bash
-npm install
+```
+flashfusion/
+├── src/
+│   ├── components/       # Reusable UI components
+│   ├── pages/           # Page components
+│   ├── layouts/         # Layout components
+│   ├── lib/             # Core utilities and helpers
+│   ├── types/           # TypeScript type definitions
+│   ├── config/          # Configuration files
+│   ├── contexts/        # React contexts
+│   ├── hooks/           # Custom React hooks
+│   ├── locales/         # i18n translations
+│   └── styles/          # Global styles
+├── public/              # Static assets
+├── .github/             # GitHub Actions workflows
+└── docs/                # Documentation
 ```
 
-### Run the development server
+## Contributing
 
-```bash
-npm run dev
-```
-
-### Setup pnpm (optional)
-
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@heroui/*
-```
-
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+FlashFusion is currently in active development. Contributions are welcome!
 
 ## License
 
-Licensed under the [MIT license](https://github.com/sctg-development/vite-react-heroui-template/blob/main/LICENSE).
+Proprietary - FlashFusion.co
+
+---
+
+**Perfect for creators, agencies, and teams building AI-powered content workflows at scale.**
